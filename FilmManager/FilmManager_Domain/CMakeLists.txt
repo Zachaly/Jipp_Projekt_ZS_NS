@@ -19,6 +19,8 @@ add_library(FilmManager_Domain SHARED
   titleentry.h titleentry.cpp
   genre.h
   genre.cpp
+  person.h person.cpp
+
 )
 
 target_link_libraries(FilmManager_Domain PRIVATE Qt${QT_VERSION_MAJOR}::Core)
