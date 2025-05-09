@@ -1,10 +1,71 @@
 #include "person.h"
 
-Person::Person() {}
+#include <stdexcept>
+#include <sstream>
+
+using namespace std;
+
+Person::Person() : Entry() {}
 
 string Person::getFirstName() const
 {
     return firstName;
+}
+
+Person::Person(string firstName, string lastName, int birthYear, int birthMonth, int birthDay) : Entry()
+{
+    this->firstName = firstName;
+    this->lastName = lastName;
+
+    if(birthYear < 0)
+    {
+        throw invalid_argument("Invalid year");
+    }
+
+    if(birthMonth < 0 || birthMonth > 12)
+    {
+        throw invalid_argument("Invalid birth month");
+    }
+
+    if(birthDay < 0 ||
+        (birthDay > 31 && ((birthMonth <= 7 && birthMonth % 2 == 1) || (birthMonth >= 8 && birthMonth % 2 == 0))) ||
+        (birthDay > 30 && ((birthMonth <= 7 && birthMonth % 2 == 0 && birthMonth != 2) || (birthMonth >= 8 && birthMonth % 2 == 1))) ||
+        (birthDay > 29 && birthMonth == 2))
+    {
+        throw invalid_argument("Invalid birth day");
+    }
+
+    this->birthDay = birthDay;
+    this->birthMonth = birthMonth;
+    this->birthYear = birthYear;
+}
+
+Person::Person(string id, string firstName, string lastName, int birthYear, int birthMonth, int birthDay) : Entry(id)
+{
+    this->firstName = firstName;
+    this->lastName = lastName;
+
+    if(birthYear < 0)
+    {
+        throw invalid_argument("Invalid year");
+    }
+
+    if(birthMonth < 0 || birthMonth > 12)
+    {
+        throw invalid_argument("Invalid birth month");
+    }
+
+    if(birthDay < 0 ||
+        (birthDay > 31 && ((birthMonth <= 7 && birthMonth % 2 == 1) || (birthMonth >= 8 && birthMonth % 2 == 0))) ||
+        (birthDay > 30 && ((birthMonth <= 7 && birthMonth % 2 == 0 && birthMonth != 2) || (birthMonth >= 8 && birthMonth % 2 == 1))) ||
+        (birthDay > 29 && birthMonth == 2))
+    {
+        throw invalid_argument("Invalid birth day");
+    }
+
+    this->birthDay = birthDay;
+    this->birthMonth = birthMonth;
+    this->birthYear = birthYear;
 }
 
 void Person::setFirstName(const string &newFirstName)
@@ -52,9 +113,10 @@ void Person::setBirthDay(int newBirthDay)
     birthDay = newBirthDay;
 }
 
-Person::Person(const string &firstName, const string &lastName, int birthYear, int birthMonth, int birthDay) : firstName(firstName),
-    lastName(lastName),
-    birthYear(birthYear),
-    birthMonth(birthMonth),
-    birthDay(birthDay)
-{}
+string Person::toString()
+{
+    stringstream stream;
+    stream << getId() << " " << firstName << " " << lastName << " " << birthYear << " " << birthMonth << " " << birthDay;
+    return stream.str();
+
+}

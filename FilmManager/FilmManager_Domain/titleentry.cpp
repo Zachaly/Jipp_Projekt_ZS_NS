@@ -1,4 +1,5 @@
 #include "titleentry.h"
+#include <sstream>
 
 TitleEntry::TitleEntry() : Entry() {}
 
@@ -92,4 +93,11 @@ bool TitleEntry::getIsWatched() const
 void TitleEntry::setIsWatched(bool newIsWatched)
 {
     isWatched = newIsWatched;
+}
+
+string TitleEntry::stringify()
+{
+    stringstream stream;
+    stream << getId() << " " << "\"" << getTitle() << "\"" << " " << "\"" << getDescription() << " " << genre << " " << creatorId << " " << productionYear << " " << mark << " " << isWatched;
+    return stream.str();
 }

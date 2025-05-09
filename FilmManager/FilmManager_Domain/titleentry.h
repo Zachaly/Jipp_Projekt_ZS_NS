@@ -35,6 +35,8 @@ private:
     int productionYear;
     int mark;
     bool isWatched;
+protected:
+    string stringify();
 };
 
 #endif // TITLEENTRY_H

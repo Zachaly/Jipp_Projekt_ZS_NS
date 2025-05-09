@@ -20,6 +20,11 @@ add_library(FilmManager_Domain SHARED
   genre.h
   genre.cpp
   person.h person.cpp
+  movie.h movie.cpp
+  episode.h episode.cpp
+  serie.h serie.cpp
+  serieStatus.h
+  serieStatus.cpp
 
 )
 
