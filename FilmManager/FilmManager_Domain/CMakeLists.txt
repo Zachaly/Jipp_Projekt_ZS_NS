@@ -13,9 +13,12 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 add_library(FilmManager_Domain SHARED
   FilmManager_Domain_global.h
-  filmmanager_domain.cpp
-  filmmanager_domain.h
+
+
   entry.h entry.cpp
+  titleentry.h titleentry.cpp
+  genre.h
+  genre.cpp
 )
 
 target_link_libraries(FilmManager_Domain PRIVATE Qt${QT_VERSION_MAJOR}::Core)
