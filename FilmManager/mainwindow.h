@@ -16,8 +16,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    void changePage(QWidget* widget);
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

@@ -23,6 +23,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(FilmManager
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        startviewwidget.h startviewwidget.cpp startviewwidget.ui
+        peoplelistviewwidget.h peoplelistviewwidget.cpp peoplelistviewwidget.ui
+        personviewwidget.h personviewwidget.cpp personviewwidget.ui
+        addpersondialog.h addpersondialog.cpp addpersondialog.ui
+        modifypersondialog.h modifypersondialog.cpp modifypersondialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FilmManager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -42,7 +47,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(FilmManager PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(FilmManager PRIVATE Qt${QT_VERSION_MAJOR}::Widgets FilmManager_Domain)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
