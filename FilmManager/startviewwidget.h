@@ -18,8 +18,9 @@ public:
     ~StartViewWidget();
 
 public Q_SLOTS:
-    void peopleButton_clicked();
-
+    void goToPeople();
+    void goToMovies();
+    void goToSeries();
 private:
     Ui::StartViewWidget *ui;
 };

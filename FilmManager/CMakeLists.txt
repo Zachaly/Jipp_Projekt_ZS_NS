@@ -28,6 +28,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         personviewwidget.h personviewwidget.cpp personviewwidget.ui
         addpersondialog.h addpersondialog.cpp addpersondialog.ui
         modifypersondialog.h modifypersondialog.cpp modifypersondialog.ui
+        movielistviewwidget.h movielistviewwidget.cpp movielistviewwidget.ui
+        addmoviedialog.h addmoviedialog.cpp addmoviedialog.ui
+        movieviewwidget.h movieviewwidget.cpp movieviewwidget.ui
+        modifymoviedialog.h modifymoviedialog.cpp modifymoviedialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FilmManager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
