@@ -1,5 +1,6 @@
 #include "movielistviewwidget.h"
 #include "peoplelistviewwidget.h"
+#include "serielistviewwidget.h"
 #include "startviewwidget.h"
 #include "ui_startviewwidget.h"
 
@@ -30,5 +31,5 @@ void StartViewWidget::goToMovies()
 
 void StartViewWidget::goToSeries()
 {
-
+    ((MainWindow*)parent())->changePage(new SerieListViewWidget((MainWindow*)parent()));
 }
