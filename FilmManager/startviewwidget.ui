@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StartViewWidget</class>
+ <widget class="QWidget" name="StartViewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>477</width>
+    <height>346</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="peopleButton">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>60</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>People</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="moviesButton">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>60</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Movies</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="seriesButton">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>200</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Series</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

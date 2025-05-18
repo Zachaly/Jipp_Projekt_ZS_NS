@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PersonViewWidget</class>
+ <widget class="QWidget" name="PersonViewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>550</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>140</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Person</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="modifyPersonButton">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>250</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Modify</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="goBackButton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>260</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Go back</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
