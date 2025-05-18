@@ -49,6 +49,7 @@ CMakeUserPresets.json
 *.pyqtc.user*
 *.qbs.user*
 *.qmlproject.user*
+CMakeLists.txt.user*
 /share/qtcreator/examples/
 /share/qtcreator/externaltools/
 /share/qtcreator/fonts/
