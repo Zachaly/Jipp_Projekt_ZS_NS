@@ -3,6 +3,7 @@
 
 #include "FilmManager_Domain/person.h"
 #include "mainwindow.h"
+#include "ui_personviewwidget.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,13 +18,14 @@ public:
     explicit PersonViewWidget(Person &person, MainWindow *parent = nullptr);
     ~PersonViewWidget();
 
-public Q_SLOTS:
+private slots:
     void modifyPerson();
     void goBack();
 
 private:
     Ui::PersonViewWidget *ui;
     Person& person;
+    void updateUi();
 };
 
 #endif // PERSONVIEWWIDGET_H
