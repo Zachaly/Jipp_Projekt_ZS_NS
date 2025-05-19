@@ -3,14 +3,21 @@
 #include "personviewwidget.h"
 #include "ui_personviewwidget.h"
 
+using namespace std;
+
+#include <QString>
+#include <QMessageBox>
+
 PersonViewWidget::PersonViewWidget(Person& person, MainWindow *parent)
     : QWidget(parent)
     , ui(new Ui::PersonViewWidget),
     person(person)
 {
     ui->setupUi(this);
-    connect(ui->modifyPersonButton, SIGNAL(clicked()), this, SLOT(modifyPerson()));
-    connect(ui->goBackButton, SIGNAL(clicked()),this, SLOT(goBack()));
+    connect(ui->modifyButton, &QPushButton::clicked, this, &PersonViewWidget::modifyPerson);
+    connect(ui->goBackButton, &QPushButton::clicked, this, &PersonViewWidget::goBack);
+
+    updateUi();
 }
 
 PersonViewWidget::~PersonViewWidget()
@@ -18,15 +25,32 @@ PersonViewWidget::~PersonViewWidget()
     delete ui;
 }
 
-void PersonViewWidget::modifyPerson()
+void PersonViewWidget::updateUi()
 {
-    auto dialog = new ModifyPersonDialog(person, this);
-    dialog->show();
-    dialog->raise();
-    dialog->activateWindow();
+    string full = person.getFirstName() + " " + person.getLastName();
+    ui->personNameLabel->setText(QString::fromStdString(full));
+
+    QString birthDate = QString("%1-%2-%3")
+                            .arg(person.getBirthYear())
+                            .arg(person.getBirthMonth(), 2, 10, QChar('0'))
+                            .arg(person.getBirthDay(),   2, 10, QChar('0'));
+
+    ui->birthDateLabel->setText(birthDate);
 }
 
+void PersonViewWidget::modifyPerson()
+{
+    ModifyPersonDialog dialog(person, this);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        updateUi();
+        QMessageBox::information(this, "Success", "Person information updated successfully.");
+    }
+}
 void PersonViewWidget::goBack()
 {
-    ((MainWindow*)parent())->changePage(new PeopleListViewWidget((MainWindow*)parent()));
+    MainWindow *mw = qobject_cast<MainWindow*>(parent());
+    if (mw) {
+        mw->changePage(new PeopleListViewWidget(mw));
+    }
 }
