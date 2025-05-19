@@ -2,56 +2,45 @@
 <ui version="4.0">
  <class>PeopleListViewWidget</class>
  <widget class="QWidget" name="PeopleListViewWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>400</width>
-    <height>300</height>
-   </rect>
-  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>People List</string>
   </property>
-  <widget class="QPushButton" name="personButton">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>80</y>
-     <width>181</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>People list placeholder</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="addPersonButton">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>140</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Add person</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="goBackButton">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>220</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Go back</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelTitle">
+     <property name="text">
+      <string>People</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold; font-size: 18px;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="peopleListWidget"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <widget class="QPushButton" name="addPersonButton">
+       <property name="text">
+        <string>Add Person</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="goBackButton">
+       <property name="text">
+        <string>Go Back</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
