@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "peoplelistviewwidget.h"
+#include "ui_mainwindow.h"
 #include "startviewwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
