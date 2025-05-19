@@ -2,7 +2,7 @@
 #define PEOPLELISTVIEWWIDGET_H
 
 #include "mainwindow.h"
-
+#include "ui_peoplelistviewwidget.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,10 +17,11 @@ public:
     explicit PeopleListViewWidget(MainWindow *parent = nullptr);
     ~PeopleListViewWidget();
 
-public Q_SLOTS:
+private slots:
     void goToPerson();
     void addPerson();
     void goBack();
+    void refreshPeopleList();
 
 private:
     Ui::PeopleListViewWidget *ui;
