@@ -58,12 +58,12 @@ void PeopleListViewWidget::goToPerson()
 void PeopleListViewWidget::addPerson()
 {
     auto* dlg = new AddPersonDialog(this);
-    connect(dlg, &AddPersonDialog::personAdded,
-            this, &PeopleListViewWidget::refreshPeopleList);
+    connect(dlg, &AddPersonDialog::accepted, this, &PeopleListViewWidget::refreshPeopleList);
+    connect(dlg, &AddPersonDialog::rejected, this, [this]() {
+        QMessageBox::information(this, "Info", "Adding person canceled.");
+    });
 
-    if (dlg->exec() == QDialog::Accepted) {
-        QMessageBox::information(this, "Success", "Person added successfully.");
-    }
+    dlg->exec();
     delete dlg;
 }
 
