@@ -2,20 +2,28 @@
 <ui version="4.0">
  <class>PeopleListViewWidget</class>
  <widget class="QWidget" name="PeopleListViewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>587</width>
+    <height>287</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>People List</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="labelTitle">
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold; font-size: 18px;</string>
+     </property>
      <property name="text">
       <string>People</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-weight: bold; font-size: 18px;</string>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </item>
