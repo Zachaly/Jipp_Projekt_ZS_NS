@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->contentWidget = new StartViewWidget(this);
+    ui->contentWidget->setParent(this); // Ensure proper parenting
 }
 
 MainWindow::~MainWindow()
@@ -18,9 +19,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::changePage(QWidget* widget)
 {
-    auto prev = ui->contentWidget;
+    if (ui->contentWidget) {
+        ui->contentWidget->hide();
+        ui->contentWidget->deleteLater();
+    }
     ui->contentWidget = widget;
-    prev->close();
-    delete prev;
+    ui->contentWidget->setParent(this);
     ui->contentWidget->show();
 }
