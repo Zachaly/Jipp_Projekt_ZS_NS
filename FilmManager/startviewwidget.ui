@@ -6,52 +6,120 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>346</height>
+    <width>600</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Film &amp; Series Manager</string>
   </property>
-  <widget class="QPushButton" name="peopleButton">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>People</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="moviesButton">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>60</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Movies</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="seriesButton">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>200</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Series</string>
-   </property>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QPushButton {
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 25px;
+    font-size: 16px;
+    min-width: 120px;
+    min-height: 120px;
+}
+
+QPushButton:hover {
+    background-color: #3a5a8f;
+}
+
+QPushButton:pressed {
+    background-color: #2a4a7f;
+}
+
+#headerLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+#buttonContainer {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="headerLabel">
+     <property name="text">
+      <string>Film &amp; Series Manager</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="buttonContainer">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="moviesButton">
+        <property name="text">
+         <string>Movies</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/icons/movie.png</normaloff>:/icons/movie.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="seriesButton">
+        <property name="text">
+         <string>Series</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/icons/series.png</normaloff>:/icons/series.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="peopleButton">
+        <property name="text">
+         <string>People</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/icons/people.png</normaloff>:/icons/people.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
