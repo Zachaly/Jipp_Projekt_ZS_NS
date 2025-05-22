@@ -3,7 +3,6 @@
 
 #include "FilmManager_Domain/person.h"
 #include "mainwindow.h"
-#include "ui_personviewwidget.h"
 #include <QWidget>
 
 namespace Ui {

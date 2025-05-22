@@ -2,6 +2,7 @@
 #include "ui_addpersondialog.h"
 #include <QMessageBox>
 #include <QSpinBox>
+#include "FilmManager_Domain/qstringhelpers.h"
 
 AddPersonDialog::AddPersonDialog(QWidget *parent)
     : QDialog(parent)

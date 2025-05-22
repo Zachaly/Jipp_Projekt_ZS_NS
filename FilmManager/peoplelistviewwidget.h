@@ -2,7 +2,6 @@
 #define PEOPLELISTVIEWWIDGET_H
 
 #include "mainwindow.h"
-#include "ui_peoplelistviewwidget.h"
 #include <QWidget>
 
 namespace Ui {

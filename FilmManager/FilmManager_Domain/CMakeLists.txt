@@ -28,6 +28,8 @@ add_library(FilmManager_Domain SHARED
   personmanager.h
   personmanager.cpp
 
+
+
 )
 
 target_link_libraries(FilmManager_Domain PRIVATE Qt${QT_VERSION_MAJOR}::Core)
