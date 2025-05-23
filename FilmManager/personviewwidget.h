@@ -17,13 +17,14 @@ public:
     explicit PersonViewWidget(Person &person, MainWindow *parent = nullptr);
     ~PersonViewWidget();
 
-public Q_SLOTS:
+private slots:
     void modifyPerson();
     void goBack();
 
 private:
     Ui::PersonViewWidget *ui;
     Person& person;
+    void updateUi();
 };
 
 #endif // PERSONVIEWWIDGET_H

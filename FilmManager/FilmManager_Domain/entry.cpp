@@ -9,6 +9,6 @@ Entry::Entry(string id)
     this->id = id;
 }
 
-string Entry::getId() {
+string Entry::getId() const {
     return id;
 }

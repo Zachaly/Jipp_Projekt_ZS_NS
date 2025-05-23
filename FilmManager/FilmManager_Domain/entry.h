@@ -8,9 +8,9 @@ class Entry
 public:
     Entry();
     Entry(string id);
-    string getId();
+    string getId() const;
     virtual string toString() = 0;
-private:
+protected:
     string id;
 };
 

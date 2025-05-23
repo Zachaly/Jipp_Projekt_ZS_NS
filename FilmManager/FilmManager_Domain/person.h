@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Person : Entry
+class Person : public Entry
 {
 public:
     Person();

@@ -16,9 +16,13 @@ public:
     explicit ModifyPersonDialog(Person& person, QWidget *parent = nullptr);
     ~ModifyPersonDialog();
 
+private slots:
+    void accept() override;
+
 private:
     Ui::ModifyPersonDialog *ui;
     Person& person;
+    void adjustDayRange();
 };
 
 #endif // MODIFYPERSONDIALOG_H
