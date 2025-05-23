@@ -12,6 +12,7 @@ public:
     virtual string toString() = 0;
 private:
     string id;
+    string generateId();
 };
 
 #endif // ENTRY_H
