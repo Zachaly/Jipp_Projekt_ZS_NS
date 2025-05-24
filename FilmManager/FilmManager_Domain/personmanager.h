@@ -13,7 +13,7 @@ public:
     static Person& getPersonById(const std::string& id);
 
     static std::string addPerson(const std::string& firstName, const std::string& lastName,
-                                 int birthYear, int birthMonth, int birthDay);
+                                 int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector);
 
     static void loadSampleData();
 

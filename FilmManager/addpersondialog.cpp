@@ -59,7 +59,7 @@ void AddPersonDialog::on_buttonBox_accepted()
     try {
         PersonManager::addPerson(fromQString(fnQ),
                                  fromQString(lnQ),
-                                 y, m, d);
+                                 y, m, d, true, false);
         emit personAdded();
         accept();
     }

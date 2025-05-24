@@ -10,8 +10,8 @@ class Person : public Entry
 {
 public:
     Person();
-    Person(string firstName, string lastName, int birthYear, int birthMonth, int birthDay);
-    Person(string id, string firstName, string lastName, int birthYear, int birthMonth, int birthDay);
+    Person(string firstName, string lastName, int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector);
+    Person(string id, string firstName, string lastName, int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector);
     string toString();
     string getFirstName() const;
     void setFirstName(const string &newFirstName);
@@ -23,13 +23,18 @@ public:
     void setBirthMonth(int newBirthMonth);
     int getBirthDay() const;
     void setBirthDay(int newBirthDay);
-
+    bool getIsDirector();
+    void setIsDirector(bool value);
+    bool getIsActor();
+    void setIsActor(bool value);
 private:
     string firstName;
     string lastName;
     int birthYear;
     int birthMonth;
     int birthDay;
+    bool isActor;
+    bool isDirector;
 };
 
 #endif // PERSON_H

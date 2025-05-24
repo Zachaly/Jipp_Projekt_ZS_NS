@@ -19,8 +19,8 @@ Person& PersonManager::getPersonById(const std::string& id) {
 }
 
 std::string PersonManager::addPerson(const std::string& firstName, const std::string& lastName,
-                      int birthYear, int birthMonth, int birthDay) {
-    Person newPerson(firstName, lastName, birthYear, birthMonth, birthDay);
+                      int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector) {
+    Person newPerson(firstName, lastName, birthYear, birthMonth, birthDay, isActor, isDirector);
     std::string id = newPerson.getId();
     people.push_back(newPerson);
     return id;
@@ -30,9 +30,9 @@ void PersonManager::loadSampleData() {
 
     if (people.empty()) {
         try {
-            people.push_back(Person("John", "Doe", 1980, 5, 15));
-            people.push_back(Person("Jane", "Smith", 1985, 8, 22));
-            people.push_back(Person("Robert", "Johnson", 1975, 3, 10));
+            people.push_back(Person("John", "Doe", 1980, 5, 15, true, false));
+            people.push_back(Person("Jane", "Smith", 1985, 8, 22, false, true));
+            people.push_back(Person("Robert", "Johnson", 1975, 3, 10, true, true));
         } catch (const std::invalid_argument& e) {
 
         }
