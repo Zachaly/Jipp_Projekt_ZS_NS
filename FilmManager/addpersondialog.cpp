@@ -50,6 +50,8 @@ void AddPersonDialog::on_buttonBox_accepted()
     int y = ui->yearSpin->value();
     int m = ui->monthSpin->value();
     int d = ui->daySpin->value();
+    bool isDirector = ui->directorCheckBox->isChecked();
+    bool isActor = ui->actorCheckBox->isChecked();
 
     if (fnQ.isEmpty() || lnQ.isEmpty()) {
         QMessageBox::warning(this, "Incomplete", "First name and last name are required.");
@@ -59,7 +61,7 @@ void AddPersonDialog::on_buttonBox_accepted()
     try {
         PersonManager::addPerson(fromQString(fnQ),
                                  fromQString(lnQ),
-                                 y, m, d, true, false);
+                                 y, m, d, isActor, isDirector);
         emit personAdded();
         accept();
     }
