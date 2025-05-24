@@ -23,9 +23,9 @@ public:
     void setBirthMonth(int newBirthMonth);
     int getBirthDay() const;
     void setBirthDay(int newBirthDay);
-    bool getIsDirector();
+    bool getIsDirector() const;
     void setIsDirector(bool value);
-    bool getIsActor();
+    bool getIsActor() const;
     void setIsActor(bool value);
 private:
     string firstName;

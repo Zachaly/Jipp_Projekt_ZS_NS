@@ -1,6 +1,11 @@
 #include "personmanager.h"
 std::vector<Person> PersonManager::people;
 
+std::vector<Person> &PersonManager::getPeople()
+{
+    return people;
+}
+
 Person& PersonManager::getPersonById(const std::string& id) {
     for (auto& person : PersonManager::people) {
         if (person.getId() == id) {
@@ -37,4 +42,18 @@ void PersonManager::loadSampleData() {
 
         }
     }
+}
+
+std::vector<Person> &PersonManager::getPeople(function<bool (Person)> filter)
+{
+    vector<Person>* res = new vector<Person>();
+    for(auto i = people.begin(); i != people.end(); i++)
+    {
+        if(filter(*i))
+        {
+            (*res).push_back(*i);
+        }
+    }
+
+    return *res;
 }

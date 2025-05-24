@@ -8,7 +8,7 @@
 
 class PersonManager {
 public:
-    static std::vector<Person>& getPeople() { return people; }
+    static std::vector<Person>& getPeople();
 
     static Person& getPersonById(const std::string& id);
 
@@ -17,6 +17,7 @@ public:
 
     static void loadSampleData();
 
+    static std::vector<Person>& getPeople(function<bool(Person)> filter);
 private:
     static std::vector<Person> people;
 };

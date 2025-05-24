@@ -123,7 +123,7 @@ void Person::setBirthDay(int newBirthDay)
     birthDay = newBirthDay;
 }
 
-bool Person::getIsDirector()
+bool Person::getIsDirector() const
 {
     return isDirector;
 }
@@ -133,7 +133,7 @@ void Person::setIsDirector(bool value)
     isDirector = value;
 }
 
-bool Person::getIsActor()
+bool Person::getIsActor() const
 {
     return isActor;
 }
