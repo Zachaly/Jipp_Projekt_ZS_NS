@@ -16,9 +16,14 @@ PeopleListViewWidget::PeopleListViewWidget(MainWindow *parent)
 {
     ui->setupUi(this);
 
+    ui->directorsCheckBox->setChecked(true);
+    ui->actorsCheckBox->setChecked(true);
+
     connect(ui->goBackButton,    &QPushButton::clicked,            this, &PeopleListViewWidget::goBack);
     connect(ui->addPersonButton, &QPushButton::clicked,            this, &PeopleListViewWidget::addPerson);
     connect(ui->peopleListWidget,&QListWidget::itemDoubleClicked,  this, &PeopleListViewWidget::goToPerson);
+    connect(ui->directorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::refreshPeopleList);
+    connect(ui->actorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::refreshPeopleList);
 
     refreshPeopleList();
 }
@@ -32,8 +37,42 @@ void PeopleListViewWidget::refreshPeopleList()
 {
     ui->peopleListWidget->clear();
 
-    for (const auto& p : PersonManager::getPeople()) {
-        QString label = toQString(p.getFirstName() + " " + p.getLastName());
+    const bool directors = ui->directorsCheckBox->isChecked();
+    const bool actors = ui->actorsCheckBox->isChecked();
+
+    vector<Person> data;
+
+    if(directors && actors)
+    {
+        data = PersonManager::getPeople();
+    }
+    else if(directors)
+    {
+        data = PersonManager::getPeople([](Person p){
+            return p.getIsDirector();
+        });
+    }
+    else if(actors)
+    {
+        data = PersonManager::getPeople([](Person p){
+            return p.getIsActor();
+        });
+    }
+
+    for (const auto& p : data) {
+
+        string role = "";
+
+        if(p.getIsDirector())
+        {
+            role += "Director ";
+        }
+        if(p.getIsActor())
+        {
+            role += "Actor ";
+        }
+
+        QString label = toQString(role + p.getFirstName() + " " + p.getLastName());
         auto* item = new QListWidgetItem(label);
         item->setData(Qt::UserRole, toQString(p.getId()));
         ui->peopleListWidget->addItem(item);

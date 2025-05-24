@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
-    <height>287</height>
+    <width>589</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,20 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="actorsCheckBox">
+     <property name="text">
+      <string>Actors</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="directorsCheckBox">
+     <property name="text">
+      <string>Directors</string>
      </property>
     </widget>
    </item>

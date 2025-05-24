@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>AddPersonDialog</class>
  <widget class="QDialog" name="AddPersonDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>233</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Add New Person</string>
   </property>
@@ -99,15 +107,29 @@
        </item>
       </layout>
      </item>
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="actorCheckBox">
+       <property name="text">
+        <string>Actor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="directorCheckBox">
+       <property name="text">
+        <string>Director</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
