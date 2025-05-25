@@ -36,6 +36,19 @@ void PersonViewWidget::updateUi()
                             .arg(person.getBirthDay(),   2, 10, QChar('0'));
 
     ui->birthDateLabel->setText(birthDate);
+
+    string role = "";
+
+    if(person.getIsDirector())
+    {
+        role += "Director ";
+    }
+    if(person.getIsActor())
+    {
+        role += "Actor";
+    }
+
+    ui->personRoleLabel->setText(QString::fromStdString(role));
 }
 
 void PersonViewWidget::modifyPerson()

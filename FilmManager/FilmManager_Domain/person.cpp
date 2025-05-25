@@ -12,7 +12,7 @@ string Person::getFirstName() const
     return firstName;
 }
 
-Person::Person(string firstName, string lastName, int birthYear, int birthMonth, int birthDay) : Entry()
+Person::Person(string firstName, string lastName, int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector) : Entry()
 {
     this->firstName = firstName;
     this->lastName = lastName;
@@ -38,9 +38,17 @@ Person::Person(string firstName, string lastName, int birthYear, int birthMonth,
     this->birthDay = birthDay;
     this->birthMonth = birthMonth;
     this->birthYear = birthYear;
+
+    if(!isActor && !isDirector)
+    {
+        throw invalid_argument("Person has to be either actor or director");
+    }
+
+    this->isActor = isActor;
+    this->isDirector = isDirector;
 }
 
-Person::Person(string id, string firstName, string lastName, int birthYear, int birthMonth, int birthDay) : Entry(id)
+Person::Person(string id, string firstName, string lastName, int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector) : Entry(id)
 {
     this->firstName = firstName;
     this->lastName = lastName;
@@ -66,6 +74,8 @@ Person::Person(string id, string firstName, string lastName, int birthYear, int 
     this->birthDay = birthDay;
     this->birthMonth = birthMonth;
     this->birthYear = birthYear;
+    this->isActor = isActor;
+    this->isDirector = isDirector;
 }
 
 void Person::setFirstName(const string &newFirstName)
@@ -111,6 +121,26 @@ int Person::getBirthDay() const
 void Person::setBirthDay(int newBirthDay)
 {
     birthDay = newBirthDay;
+}
+
+bool Person::getIsDirector() const
+{
+    return isDirector;
+}
+
+void Person::setIsDirector(bool value)
+{
+    isDirector = value;
+}
+
+bool Person::getIsActor() const
+{
+    return isActor;
+}
+
+void Person::setIsActor(bool value)
+{
+    isActor = value;
 }
 
 string Person::toString()
