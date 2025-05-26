@@ -15,8 +15,15 @@ public:
     explicit AddSerieDialog(QWidget *parent = nullptr);
     ~AddSerieDialog();
 
+signals:
+    void serieAdded();
+
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::AddSerieDialog *ui;
+    void updateLists();
 };
 
 #endif // ADDSERIEDIALOG_H

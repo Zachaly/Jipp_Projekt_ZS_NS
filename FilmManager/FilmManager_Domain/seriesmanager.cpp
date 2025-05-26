@@ -2,12 +2,12 @@
 
 std::vector<Serie> SeriesManager::series = vector<Serie>();
 
-inline std::vector<Serie> &SeriesManager::getSeries()
+std::vector<Serie> &SeriesManager::getSeries()
 {
     return series;
 }
 
-inline std::vector<Serie> &SeriesManager::getSeries(function<bool (Serie)> filter)
+std::vector<Serie> &SeriesManager::getSeries(function<bool (Serie)> filter)
 {
     vector<Serie>* res = new vector<Serie>();
 
@@ -22,7 +22,7 @@ inline std::vector<Serie> &SeriesManager::getSeries(function<bool (Serie)> filte
     return *res;
 }
 
-inline Serie &SeriesManager::getById(string id)
+Serie &SeriesManager::getById(string id)
 {
     for(auto serie : series)
     {
@@ -37,7 +37,7 @@ inline Serie &SeriesManager::getById(string id)
     return s;
 }
 
-inline void SeriesManager::addSerie(Serie &serie)
+void SeriesManager::addSerie(Serie &serie)
 {
     series.push_back(serie);
 }
