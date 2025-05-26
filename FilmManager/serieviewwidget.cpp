@@ -39,6 +39,7 @@ void SerieViewWidget::goToEpisode()
 void SerieViewWidget::modifySeries()
 {
     auto dialog = new ModifySerieDialog(serie, this);
+    connect(dialog, &ModifySerieDialog::accepted, this, &SerieViewWidget::updateUi);
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
