@@ -7,7 +7,7 @@
 #include <vector>
 
 
-class Serie : TitleEntry
+class Serie : public TitleEntry
 {
 public:
     Serie();
