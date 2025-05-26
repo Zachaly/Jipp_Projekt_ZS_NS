@@ -24,7 +24,7 @@ std::vector<Serie> &SeriesManager::getSeries(function<bool (Serie)> filter)
 
 Serie &SeriesManager::getById(string id)
 {
-    for(auto serie : series)
+    for(auto& serie : series)
     {
         if(serie.getId() == id)
         {

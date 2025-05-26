@@ -25,6 +25,7 @@ public Q_SLOTS:
 private:
     Ui::SerieViewWidget *ui;
     Serie& serie;
+    void updateUi();
 };
 
 #endif // SERIEVIEWWIDGET_H
