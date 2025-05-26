@@ -22,6 +22,7 @@ public Q_SLOTS:
     void addSerie();
 private:
     Ui::SerieListViewWidget *ui;
+    void updateList();
 };
 
 #endif // SERIELISTVIEWWIDGET_H

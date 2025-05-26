@@ -4,6 +4,8 @@
 #include "serieviewwidget.h"
 #include "startviewwidget.h"
 #include "ui_serielistviewwidget.h"
+#include "FilmManager_Domain/seriesmanager.h"
+#include "FilmManager_Domain/qstringhelpers.h"
 
 SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
     : QWidget(parent)
@@ -11,8 +13,9 @@ SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
 {
     ui->setupUi(this);
     connect(ui->goBackButton, SIGNAL(clicked()), this, SLOT(goBack()));
-    connect(ui->listMockButton, SIGNAL(clicked()), this, SLOT(goToSerie()));
     connect(ui->addSerieButton, SIGNAL(clicked()), this, SLOT(addSerie()));
+    connect(ui->serieList ,&QListWidget::itemDoubleClicked,  this, &SerieListViewWidget::goToSerie);
+    updateList();
 }
 
 SerieListViewWidget::~SerieListViewWidget()
@@ -27,14 +30,29 @@ void SerieListViewWidget::goBack()
 
 void SerieListViewWidget::goToSerie()
 {
-    Serie serie;
+    auto id = fromQString(ui->serieList->currentItem()->data(Qt::UserRole).toString());
+
+    Serie& serie = SeriesManager::getById(id);
     ((MainWindow*)parent())->changePage(new SerieViewWidget(serie, (MainWindow*)parent()));
 }
 
 void SerieListViewWidget::addSerie()
 {
-    auto dialog = new AddSerieDialog(this);
+    auto* dialog = new AddSerieDialog(this);
+    connect(dialog, &AddSerieDialog::accepted, this, &SerieListViewWidget::updateList);
+
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
+}
+
+void SerieListViewWidget::updateList()
+{
+    for(auto& s : SeriesManager::getSeries())
+    {
+        QString label = toQString(s.getTitle());
+        auto* item = new QListWidgetItem(label);
+        item->setData(Qt::UserRole, toQString(s.getId()));
+        ui->serieList->addItem(item);
+    }
 }

@@ -6,52 +6,49 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>482</width>
+    <height>371</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="listMockButton">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>90</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>List mock</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="addSerieButton">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>190</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Add</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="goBackButton">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>250</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Go back</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold; font-size: 18px;</string>
+     </property>
+     <property name="text">
+      <string>Series</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="serieList"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <widget class="QPushButton" name="addSerieButton">
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="goBackButton">
+       <property name="text">
+        <string>Go back</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
