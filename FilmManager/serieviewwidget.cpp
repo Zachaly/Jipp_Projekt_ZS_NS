@@ -20,6 +20,7 @@ SerieViewWidget::SerieViewWidget(Serie& serie, MainWindow *parent)
     connect(ui->goBackButton, SIGNAL(clicked()), this, SLOT(goBack()));
     connect(ui->modifySeriesButton, SIGNAL(clicked()), this, SLOT(modifySeries()));
     connect(ui->addEpisodeButton, SIGNAL(clicked()), this, SLOT(addEpisode()));
+    connect(ui->episodeList ,&QListWidget::itemDoubleClicked,  this, &SerieViewWidget::goToEpisode);
     updateUi();
 }
 
@@ -35,7 +36,8 @@ void SerieViewWidget::goBack()
 
 void SerieViewWidget::goToEpisode()
 {
-    Episode episode;
+    auto id = fromQString(ui->episodeList->currentItem()->data(Qt::UserRole).toString());
+    Episode& episode = EpisodeManager::getById(id);
     ((MainWindow*)parent())->changePage(new EpisodeViewWidget(episode, (MainWindow*)parent()));
 }
 

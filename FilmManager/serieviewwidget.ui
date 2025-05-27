@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="titleLabel">
      <property name="styleSheet">
-      <string notr="true">font-weight: bold; font-size: 18px;</string>
+      <string notr="true">connect(ui-&gt;serieList ,&amp;QListWidget::itemDoubleClicked,  this, &amp;SerieListViewWidget::goToSerie);;</string>
      </property>
      <property name="text">
       <string>Title</string>
