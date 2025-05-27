@@ -42,7 +42,6 @@ private:
     void viewSelectedMovie();
     vector<Movie> getFilteredMovies();
 
-    // Helper methods for enhanced display
     QString getGenreIcon(Genre genre);
     QString getGenreName(Genre genre);
     QString generateStarRating(double rating);
