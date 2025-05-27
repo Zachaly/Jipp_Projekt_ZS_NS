@@ -3,26 +3,18 @@
 
 TitleEntry::TitleEntry() : Entry() {}
 
-TitleEntry::TitleEntry(string title, string description, Genre genre, string creatorId, int productionYear, int mark, bool isWatched) : Entry()
+TitleEntry::TitleEntry(const string& title, const string& description, Genre genre,
+                       const string& creatorId, int productionYear, int mark, bool isWatched)
+    : Entry(), title(title), description(description), genre(genre),
+    creatorId(creatorId), productionYear(productionYear), mark(mark), isWatched(isWatched)
 {
-    this->title = title;
-    this->description = description;
-    this->genre = genre;
-    this->creatorId = creatorId;
-    this->productionYear = productionYear;
-    this->mark = mark;
-    this->isWatched = isWatched;
 }
 
-TitleEntry::TitleEntry(string id, string title, string description, Genre genre, string creatorId, int productionYear, int mark, bool isWatched) : Entry(id)
+TitleEntry::TitleEntry(const string& id, const string& title, const string& description,
+                       Genre genre, const string& creatorId, int productionYear, int mark, bool isWatched)
+    : Entry(id), title(title), description(description), genre(genre),
+    creatorId(creatorId), productionYear(productionYear), mark(mark), isWatched(isWatched)
 {
-    this->title = title;
-    this->description = description;
-    this->genre = genre;
-    this->creatorId = creatorId;
-    this->productionYear = productionYear;
-    this->mark = mark;
-    this->isWatched = isWatched;
 }
 
 string TitleEntry::getTitle() const
@@ -98,6 +90,8 @@ void TitleEntry::setIsWatched(bool newIsWatched)
 string TitleEntry::stringify()
 {
     stringstream stream;
-    stream << getId() << " " << "\"" << getTitle() << "\"" << " " << "\"" << getDescription() << " " << genre << " " << creatorId << " " << productionYear << " " << mark << " " << isWatched;
+    stream << getId() << " " << "\"" << getTitle() << "\"" << " " << "\"" << getDescription() << "\" "
+           << static_cast<int>(genre) << " " << creatorId << " " << productionYear << " "
+           << mark << " " << (isWatched ? 1 : 0);
     return stream.str();
 }
