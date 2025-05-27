@@ -13,7 +13,7 @@ public:
     Movie(string id, string title, string description, Genre genre, string creatorId, int productionYear, int mark, bool isWatched, int length, vector<string> actorIds);
     int getLength() const;
     void setLength(int newLength);
-    vector<string> getActorIds() const;
+    vector<string>& getActorIds();
     void setActorIds(const vector<string> &newActorIds);
     string toString();
     void addActor(string actorId);

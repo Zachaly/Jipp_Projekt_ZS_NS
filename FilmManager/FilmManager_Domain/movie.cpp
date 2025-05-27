@@ -30,7 +30,7 @@ void Movie::setLength(int newLength)
     length = newLength;
 }
 
-vector<string> Movie::getActorIds() const
+vector<string>& Movie::getActorIds()
 {
     return actorIds;
 }
@@ -49,6 +49,16 @@ string Movie::toString()
         stream << " " << *i;
     }
     return stream.str();
+}
+
+void Movie::addActor(string actorId)
+{
+    actorIds.push_back(actorId);
+}
+
+void Movie::addActor(Person person)
+{
+    actorIds.push_back(person.getId());
 }
 
 string Movie::stringify()

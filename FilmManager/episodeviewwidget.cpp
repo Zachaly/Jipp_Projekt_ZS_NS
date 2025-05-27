@@ -5,6 +5,7 @@
 #include "ui_episodeviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/qstringhelpers.h"
+#include "FilmManager_Domain/seriesmanager.h"
 
 EpisodeViewWidget::EpisodeViewWidget(Episode& episode, MainWindow *parent)
     : QWidget(parent)
@@ -25,13 +26,14 @@ EpisodeViewWidget::~EpisodeViewWidget()
 
 void EpisodeViewWidget::goBack()
 {
-    Serie serie; // mock, load serie with id from episode
+    Serie& serie = SeriesManager::getById(episode.getSeriesId());
     ((MainWindow*)parent())->changePage(new SerieViewWidget(serie, (MainWindow*)parent()));
 }
 
 void EpisodeViewWidget::modifyEpisode()
 {
     auto dialog = new ModifyEpisodeDialog(episode);
+    connect(dialog, &ModifyEpisodeDialog::accepted, this, &EpisodeViewWidget::updateUi);
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
@@ -61,6 +63,7 @@ void EpisodeViewWidget::updateUi()
         return false;
     });
 
+    ui->actorList->clear();
     for(auto& a : actors)
     {
         QString label = toQString(a.getFirstName() + " " + a.getLastName());
