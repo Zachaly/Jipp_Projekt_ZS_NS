@@ -33,6 +33,9 @@ ModifyPersonDialog::ModifyPersonDialog(Person& person, QWidget *parent)
             this, &ModifyPersonDialog::accept);
     connect(ui->buttonBox, &QDialogButtonBox::rejected,
             this, &ModifyPersonDialog::reject);
+
+    ui->directorCheckBox->setChecked(person.getIsDirector());
+    ui->actorCheckBox->setChecked(person.getIsActor());
 }
 
 
@@ -67,12 +70,23 @@ void ModifyPersonDialog::accept()
         return;
     }
 
+    bool isActor = ui->actorCheckBox->isChecked();
+    bool isDirector = ui->directorCheckBox->isChecked();
+
+    if(!isActor && !isDirector)
+    {
+        QMessageBox::warning(this, "Incomplete", "Person has to be either actor or director.");
+        return;
+    }
+
     try {
         person.setFirstName(fn.toStdString());
         person.setLastName(ln.toStdString());
         person.setBirthYear(ui->yearSpin->value());
         person.setBirthMonth(ui->monthSpin->value());
         person.setBirthDay(ui->daySpin->value());
+        person.setIsActor(isActor);
+        person.setIsDirector(isDirector);
 
         QDialog::accept();
     } catch (const std::invalid_argument& e) {
