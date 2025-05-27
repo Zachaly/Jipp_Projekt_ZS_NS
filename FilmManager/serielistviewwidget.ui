@@ -6,27 +6,148 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>371</height>
+    <width>728</width>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="titleLabel">
-     <property name="styleSheet">
-      <string notr="true">font-weight: bold; font-size: 18px;</string>
-     </property>
-     <property name="text">
-      <string>Series</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    margin-top: 1ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+    color: #495057;
+}
+
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}
+
+QLineEdit {
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: white;
+    selection-background-color: #007bff;
+}
+
+QLineEdit:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+QComboBox {
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: white;
+    min-width: 120px;
+}
+
+QComboBox:focus {
+    border-color: #007bff;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: #ced4da;
+    border-left-style: solid;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/arrow-down.png);
+    width: 12px;
+    height: 12px;
+}
+
+QRadioButton {
+    spacing: 8px;
+    color: #495057;
+    font-weight: normal;
+}
+
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #ced4da;
+    border-radius: 9px;
+    background-color: white;
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #007bff;
+    border-radius: 9px;
+    background-color: #007bff;
+}
+
+QRadioButton::indicator:checked:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+QLabel {
+    color: #495057;
+    font-weight: normal;</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
    <item>
     <widget class="QListWidget" name="serieList"/>
    </item>
@@ -34,15 +155,109 @@
     <layout class="QHBoxLayout" name="buttonLayout">
      <item>
       <widget class="QPushButton" name="addSerieButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #28a745;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #218838;
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;
+}</string>
+       </property>
        <property name="text">
-        <string>Add</string>
+        <string>➕ Dodaj serial</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="goBackButton">
+      <widget class="QPushButton" name="modifyButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #ffc107;
+    color: #212529;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #e0a800;
+}
+
+QPushButton:pressed {
+    background-color: #d39e00;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}</string>
+       </property>
        <property name="text">
-        <string>Go back</string>
+        <string>✏️ Modyfikuj</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="deleteButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #dc3545;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #c82333;
+}
+
+QPushButton:pressed {
+    background-color: #bd2130;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}</string>
+       </property>
+       <property name="text">
+        <string>🗑️ Usuń</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="goBackButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #6c757d;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #5a6268;
+}
+
+QPushButton:pressed {
+    background-color: #545b62;
+}</string>
+       </property>
+       <property name="text">
+        <string>⬅️ Wróć</string>
        </property>
       </widget>
      </item>

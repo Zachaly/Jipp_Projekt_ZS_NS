@@ -10,6 +10,7 @@ public:
     static vector<Episode>& getEpisodes(function<bool(Episode)> filter);
     static Episode& getById(string id);
     static void addEpisode(Episode& episode);
+    static void removeEpisode(string id);
 private:
     static vector<Episode> episodes;
 };

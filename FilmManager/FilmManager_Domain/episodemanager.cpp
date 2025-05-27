@@ -37,3 +37,8 @@ void EpisodeManager::addEpisode(Episode &episode)
 {
     episodes.push_back(episode);
 }
+
+void EpisodeManager::removeEpisode(string id)
+{
+    episodes.erase(std::remove_if(episodes.begin(), episodes.end(), [&id](const Episode& e) { return e.getId() == id; }), episodes.end());
+}

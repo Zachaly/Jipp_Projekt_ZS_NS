@@ -41,3 +41,8 @@ void SeriesManager::addSerie(Serie &serie)
 {
     series.push_back(serie);
 }
+
+void SeriesManager::removeSerie(string id)
+{
+    series.erase(std::remove_if(series.begin(), series.end(), [&id](const Serie& e) { return e.getId() == id; }), series.end());
+}

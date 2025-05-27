@@ -10,6 +10,7 @@ public:
 
     static Serie& getById(string id);
     static void addSerie(Serie& serie);
+    static void removeSerie(string id);
 private:
     static std::vector<Serie> series;
 };
