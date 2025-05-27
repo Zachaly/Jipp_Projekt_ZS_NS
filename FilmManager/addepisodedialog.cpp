@@ -7,6 +7,8 @@
 #include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/seriesmanager.h"
 
+#include <QMessageBox>
+
 AddEpisodeDialog::AddEpisodeDialog(string serieId, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::AddEpisodeDialog),
@@ -43,6 +45,13 @@ void AddEpisodeDialog::on_buttonBox_accepted()
 {
     string title = fromQString(ui->titleEdit->text());
     string description = fromQString(ui->descriptionEdit->toPlainText());
+
+    if(title.empty() || description.empty())
+    {
+        QMessageBox::warning(this, "Incomplete", "Title and description are required.");
+        return;
+    }
+
     string directorId = comboBoxIds[ui->directorComboBox->currentIndex()];
     int productionYear = ui->productionYearSpinBox->value();
     int mark = ui->markSlider->value();
@@ -60,6 +69,12 @@ void AddEpisodeDialog::on_buttonBox_accepted()
         {
             actorIds.push_back(fromQString(item->data(Qt::UserRole).toString()));
         }
+    }
+
+    if(actorIds.empty())
+    {
+        QMessageBox::warning(this, "Incomplete", "You must select at least 1 actor.");
+        return;
     }
 
     Episode ep = Episode(title, description, (Genre)0, directorId, productionYear, mark, isWatched, length, number, seasonNumber, serieId, actorIds);
@@ -84,6 +99,7 @@ void AddEpisodeDialog::loadLists()
         ui->directorComboBox->addItem(toQString(d.getFirstName() + " " + d.getLastName()));
         comboBoxIds.push_back(d.getId());
     }
+    ui->directorComboBox->setCurrentIndex(0);
 
     for(auto& a : actors)
     {

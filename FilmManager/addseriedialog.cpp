@@ -7,6 +7,8 @@
 #include "FilmManager_Domain/genre.h"
 #include "FilmManager_Domain/seriesmanager.h"
 
+#include <QMessageBox>
+
 AddSerieDialog::AddSerieDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::AddSerieDialog)
@@ -25,6 +27,7 @@ AddSerieDialog::AddSerieDialog(QWidget *parent)
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
+    comboBoxIds = vector<string>();
     updateLists();
 }
 
@@ -32,16 +35,34 @@ void AddSerieDialog::on_buttonBox_accepted()
 {
     string title = fromQString(ui->titleEdit->text().trimmed());
     string description = fromQString(ui->descriptionTextEdit->toPlainText());
-    int mark = ui->markSlider->sliderPosition();
+    int mark = ui->markSlider->value();
     bool isWatched = ui->watchedCheckBox->isChecked();
 
-    string creatorId = fromQString(ui->creatorList->currentItem()->data(Qt::UserRole).toString());
+    if(title.empty() || description.empty())
+    {
+        QMessageBox::warning(this, "Incomplete", "Title and description are required.");
+        return;
+    }
+
+    string creatorId = comboBoxIds[ui->creatorComboBox->currentIndex()];
+
+    if(!ui->genreList->currentItem())
+    {
+        QMessageBox::warning(this, "Incomplete", "You must select genre.");
+        return;
+    }
 
     Genre genre = (Genre)ui->genreList->currentItem()->data(Qt::UserRole).toInt();
 
     int productionYear = ui->productionYearSpinBox->value();
 
     int seasonCount = ui->seasonCountSpinBox->value();
+
+    if(!ui->statusList->currentItem())
+    {
+        QMessageBox::warning(this, "Incomplete", "You must select status.");
+        return;
+    }
 
     SerieStatus status = (SerieStatus)ui->statusList->currentItem()->data(Qt::UserRole).toInt();
 
@@ -58,13 +79,12 @@ void AddSerieDialog::updateLists()
         return p.getIsDirector();
     });
 
-    for(auto creator : creators)
+    for(auto& creator : creators)
     {
-        QString label = toQString(creator.getFirstName() + " " + creator.getLastName());
-        auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, toQString(creator.getId()));
-        ui->creatorList->addItem(item);
+        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()));
+        comboBoxIds.push_back(creator.getId());
     }
+    ui->creatorComboBox->setCurrentIndex(0);
 
     auto statuses = { Ongoing, Ended, Cancelled };
 

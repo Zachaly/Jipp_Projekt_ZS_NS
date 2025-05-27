@@ -5,6 +5,7 @@
 #include "startviewwidget.h"
 #include "ui_serielistviewwidget.h"
 #include "FilmManager_Domain/seriesmanager.h"
+#include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/qstringhelpers.h"
 
 SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
@@ -15,6 +16,11 @@ SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
     connect(ui->goBackButton, SIGNAL(clicked()), this, SLOT(goBack()));
     connect(ui->addSerieButton, SIGNAL(clicked()), this, SLOT(addSerie()));
     connect(ui->serieList ,&QListWidget::itemDoubleClicked,  this, &SerieListViewWidget::goToSerie);
+
+    auto noDirectors = PersonManager::getPeople([](Person p) { return p.getIsDirector(); }).empty();
+
+    ui->addSerieButton->setDisabled(noDirectors);
+
     updateList();
 }
 

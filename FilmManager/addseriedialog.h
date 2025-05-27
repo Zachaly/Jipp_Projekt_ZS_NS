@@ -24,6 +24,7 @@ private slots:
 private:
     Ui::AddSerieDialog *ui;
     void updateLists();
+    std::vector<std::string> comboBoxIds;
 };
 
 #endif // ADDSERIEDIALOG_H

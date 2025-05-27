@@ -5,6 +5,8 @@
 #include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/personmanager.h"
 
+#include <QMessageBox>
+
 ModifyEpisodeDialog::ModifyEpisodeDialog(Episode& episode, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ModifyEpisodeDialog),
@@ -40,6 +42,11 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
 {
     string title = fromQString(ui->titleEdit->text());
     string description = fromQString(ui->descriptionEdit->toPlainText());
+    if(title.empty() || description.empty())
+    {
+        QMessageBox::warning(this, "Incomplete", "Title and description are required.");
+        return;
+    }
     string directorId = comboBoxIds[ui->directorComboBox->currentIndex()];
     int productionYear = ui->productionYearSpinBox->value();
     int mark = ui->markSlider->value();
@@ -57,6 +64,12 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
         {
             actorIds.push_back(fromQString(item->data(Qt::UserRole).toString()));
         }
+    }
+
+    if(actorIds.empty())
+    {
+        QMessageBox::warning(this, "Incomplete", "You must select at least 1 actor.");
+        return;
     }
 
     episode.getActorIds().clear();

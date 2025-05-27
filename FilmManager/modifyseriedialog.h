@@ -26,6 +26,7 @@ private:
     Ui::ModifySerieDialog *ui;
     Serie& serie;
     void updateLists();
+    std::vector<std::string> comboBoxIds;
 };
 
 #endif // MODIFYSERIEDIALOG_H
