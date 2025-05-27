@@ -1,27 +1,34 @@
 #include "entry.h"
 #include <ctime>
+#include <cstdlib>
 #include <string>
 
 Entry::Entry() {
     this->id = generateId();
 }
 
-Entry::Entry(string id)
+Entry::Entry(const std::string& id)
 {
     this->id = id;
 }
 
-string Entry::getId() const {
+std::string Entry::getId() const {
     return id;
 }
 
-string Entry::generateId()
+std::string Entry::generateId()
 {
-    srand((unsigned)time(NULL));
+    static bool seeded = false;
+    if (!seeded) {
+        srand(static_cast<unsigned>(time(nullptr)));
+        seeded = true;
+    }
+
     static const char alphanum[] =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "abcdefghijklmnopqrstuvwxyz";
+
     std::string tmp_s;
     tmp_s.reserve(50);
 
