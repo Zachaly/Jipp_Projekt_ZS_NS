@@ -5,7 +5,7 @@
 #include "titleentry.h"
 #include <vector>
 
-class Movie : TitleEntry
+class Movie : public TitleEntry
 {
 public:
     Movie();

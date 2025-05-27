@@ -137,7 +137,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QListView" name="episodeList"/>
+    <widget class="QListWidget" name="episodeList"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="buttonLayout">

@@ -4,7 +4,7 @@
 #include "movie.h"
 
 
-class Episode : Movie
+class Episode : public Movie
 {
 public:
     Episode();

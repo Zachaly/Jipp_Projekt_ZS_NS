@@ -21,6 +21,7 @@ public Q_SLOTS:
     void goBack();
     void goToEpisode();
     void modifySeries();
+    void addEpisode();
 
 private:
     Ui::SerieViewWidget *ui;

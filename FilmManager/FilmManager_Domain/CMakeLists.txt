@@ -29,6 +29,7 @@ add_library(FilmManager_Domain SHARED
   personmanager.cpp
   seriesmanager.h
   seriesmanager.cpp
+  episodemanager.h episodemanager.cpp
 
 
 

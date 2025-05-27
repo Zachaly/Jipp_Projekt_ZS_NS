@@ -17,9 +17,17 @@ public:
     explicit AddEpisodeDialog(string serieId, QWidget *parent = nullptr);
     ~AddEpisodeDialog();
 
+signals:
+    void episodeAdded();
+
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::AddEpisodeDialog *ui;
     string serieId;
+    void loadLists();
+    vector<string> comboBoxIds;
 };
 
 #endif // ADDEPISODEDIALOG_H

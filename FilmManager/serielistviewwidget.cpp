@@ -48,6 +48,7 @@ void SerieListViewWidget::addSerie()
 
 void SerieListViewWidget::updateList()
 {
+    ui->serieList->clear();
     for(auto& s : SeriesManager::getSeries())
     {
         QString label = toQString(s.getTitle());
