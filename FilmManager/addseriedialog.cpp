@@ -44,27 +44,15 @@ void AddSerieDialog::on_buttonBox_accepted()
         return;
     }
 
-    string creatorId = comboBoxIds[ui->creatorComboBox->currentIndex()];
+    string creatorId = ui->creatorComboBox->currentData().toString().toStdString();
 
-    if(!ui->genreList->currentItem())
-    {
-        QMessageBox::warning(this, "Incomplete", "You must select genre.");
-        return;
-    }
-
-    Genre genre = (Genre)ui->genreList->currentItem()->data(Qt::UserRole).toInt();
+    Genre genre = static_cast<Genre>(ui->genreComboBox->currentIndex());
 
     int productionYear = ui->productionYearSpinBox->value();
 
     int seasonCount = ui->seasonCountSpinBox->value();
 
-    if(!ui->statusList->currentItem())
-    {
-        QMessageBox::warning(this, "Incomplete", "You must select status.");
-        return;
-    }
-
-    SerieStatus status = (SerieStatus)ui->statusList->currentItem()->data(Qt::UserRole).toInt();
+    SerieStatus status = static_cast<SerieStatus>(ui->statusComboBox->currentIndex());
 
     Serie serie = Serie(title, description, genre, creatorId, productionYear, mark, isWatched, status, seasonCount, vector<string>());
 
@@ -81,7 +69,7 @@ void AddSerieDialog::updateLists()
 
     for(auto& creator : creators)
     {
-        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()));
+        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()), QString::fromStdString(creator.getId()));
         comboBoxIds.push_back(creator.getId());
     }
     ui->creatorComboBox->setCurrentIndex(0);
@@ -90,20 +78,14 @@ void AddSerieDialog::updateLists()
 
     for(auto status : statuses)
     {
-        QString label = toQString(serieStatusString(status));
-        auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, status);
-        ui->statusList->addItem(item);
+        ui->statusComboBox->addItem(QString::fromStdString(serieStatusString(status)), status);
     }
 
     auto genres = { Adventure };
 
     for(auto genre : genres)
     {
-        QString label = toQString(getGenreString(genre));
-        auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, genre);
-        ui->genreList->addItem(item);
+        ui->genreComboBox->addItem(QString::fromStdString(getGenreString(genre)), genre);
     }
 }
 

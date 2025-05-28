@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>576</width>
-    <height>490</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="titleLabel">
        <property name="text">
-        <string>Title</string>
+        <string>Tytuł</string>
        </property>
       </widget>
      </item>
@@ -29,7 +29,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="descriptionLabel">
        <property name="text">
-        <string>Description</string>
+        <string>Opis</string>
        </property>
       </widget>
      </item>
@@ -39,7 +39,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="seasonLabel">
        <property name="text">
-        <string>Season</string>
+        <string>Sezon</string>
        </property>
       </widget>
      </item>
@@ -49,7 +49,7 @@
      <item row="3" column="0">
       <widget class="QLabel" name="numberLabel">
        <property name="text">
-        <string>Number</string>
+        <string>Numer</string>
        </property>
       </widget>
      </item>
@@ -59,7 +59,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="lengthLabel">
        <property name="text">
-        <string>Length</string>
+        <string>Czas trwania</string>
        </property>
       </widget>
      </item>
@@ -69,14 +69,14 @@
      <item row="6" column="0">
       <widget class="QLabel" name="markLabel">
        <property name="text">
-        <string>Mark</string>
+        <string>Ocena</string>
        </property>
       </widget>
      </item>
      <item row="7" column="0">
       <widget class="QLabel" name="watchedLabel">
        <property name="text">
-        <string>Watched</string>
+        <string>Oglądany</string>
        </property>
       </widget>
      </item>
@@ -90,7 +90,7 @@
      <item row="8" column="0">
       <widget class="QLabel" name="directorLabel">
        <property name="text">
-        <string>Director</string>
+        <string>Reżyser</string>
        </property>
       </widget>
      </item>
@@ -100,7 +100,7 @@
      <item row="9" column="0">
       <widget class="QLabel" name="actorLabel">
        <property name="text">
-        <string>Actors</string>
+        <string>Aktorzy</string>
        </property>
       </widget>
      </item>
@@ -128,7 +128,7 @@
      <item row="5" column="0">
       <widget class="QLabel" name="productionYearLabel">
        <property name="text">
-        <string>Production year</string>
+        <string>Rok produkcji</string>
        </property>
       </widget>
      </item>

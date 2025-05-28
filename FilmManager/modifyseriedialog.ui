@@ -19,7 +19,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="titleLabel">
        <property name="text">
-        <string>Title</string>
+        <string>Tytuł</string>
        </property>
       </widget>
      </item>
@@ -29,7 +29,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="descriptionLabel">
        <property name="text">
-        <string>Description</string>
+        <string>Opis</string>
        </property>
       </widget>
      </item>
@@ -39,12 +39,9 @@
      <item row="2" column="0">
       <widget class="QLabel" name="genreLabel">
        <property name="text">
-        <string>Genre</string>
+        <string>Gatunek</string>
        </property>
       </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QListWidget" name="genreList"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="statusLabel">
@@ -53,13 +50,10 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QListWidget" name="statusList"/>
-     </item>
      <item row="4" column="0">
       <widget class="QLabel" name="productionuYearLabel">
        <property name="text">
-        <string>Production year</string>
+        <string>Rok produkcji</string>
        </property>
       </widget>
      </item>
@@ -69,7 +63,7 @@
      <item row="5" column="0">
       <widget class="QLabel" name="seasonCountLabel">
        <property name="text">
-        <string>Season count</string>
+        <string>Liczba sezonów</string>
        </property>
       </widget>
      </item>
@@ -79,21 +73,21 @@
      <item row="6" column="0">
       <widget class="QLabel" name="creatorLabel">
        <property name="text">
-        <string>Creator</string>
+        <string>Twórca</string>
        </property>
       </widget>
      </item>
      <item row="7" column="0">
       <widget class="QLabel" name="markLabel">
        <property name="text">
-        <string>Mark</string>
+        <string>Ocena</string>
        </property>
       </widget>
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="watchedLabel">
        <property name="text">
-        <string>Watched</string>
+        <string>Czy oglądany</string>
        </property>
       </widget>
      </item>
@@ -124,6 +118,12 @@
      </item>
      <item row="6" column="1">
       <widget class="QComboBox" name="creatorComboBox"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="genreComboBox"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="statusComboBox"/>
      </item>
     </layout>
    </item>

@@ -30,7 +30,7 @@ void Movie::setLength(int newLength)
     length = newLength;
 }
 
-vector<string>& Movie::getActorIds()
+const vector<string>& Movie::getActorIds() const
 {
     return actorIds;
 }

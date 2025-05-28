@@ -72,7 +72,7 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
         return;
     }
 
-    episode.getActorIds().clear();
+    //episode.getActorIds().clear();
 
     for(auto& id : actorIds)
     {

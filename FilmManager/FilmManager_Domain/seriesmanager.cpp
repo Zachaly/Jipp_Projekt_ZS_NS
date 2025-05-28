@@ -1,5 +1,7 @@
 #include "seriesmanager.h"
 
+#include "episodemanager.h"
+
 std::vector<Serie> SeriesManager::series = vector<Serie>();
 
 std::vector<Serie> &SeriesManager::getSeries()
@@ -44,5 +46,12 @@ void SeriesManager::addSerie(Serie &serie)
 
 void SeriesManager::removeSerie(string id)
 {
+    auto episodes = getById(id).getEpisodeIds();
+
+    for(auto& epId : episodes)
+    {
+        EpisodeManager::removeEpisode(epId);
+    }
+
     series.erase(std::remove_if(series.begin(), series.end(), [&id](const Serie& e) { return e.getId() == id; }), series.end());
 }

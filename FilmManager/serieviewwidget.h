@@ -1,6 +1,7 @@
 #ifndef SERIEVIEWWIDGET_H
 #define SERIEVIEWWIDGET_H
 
+#include "FilmManager_Domain/episode.h"
 #include "FilmManager_Domain/serie.h"
 #include "mainwindow.h"
 
@@ -27,6 +28,10 @@ private:
     Ui::SerieViewWidget *ui;
     Serie& serie;
     void updateUi();
+    QString getGenreName(Genre genre);
+    QString getStatusName(SerieStatus status);
+    void addEpisodeListItem(const Episode& episode);
+    QString generateStarRating(double rating);
 };
 
 #endif // SERIEVIEWWIDGET_H

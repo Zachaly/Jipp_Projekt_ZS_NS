@@ -56,27 +56,16 @@ void ModifySerieDialog::on_buttonBox_accepted()
         return;
     }
 
-    string creatorId = comboBoxIds[ui->creatorComboBox->currentIndex()];
+    string creatorId = ui->creatorComboBox->currentData().toString().toStdString();
 
-    if(!ui->genreList->currentItem())
-    {
-        QMessageBox::warning(this, "Incomplete", "You must select genre.");
-        return;
-    }
 
-    Genre genre = (Genre)ui->genreList->currentItem()->data(Qt::UserRole).toInt();
+    Genre genre = static_cast<Genre>(ui->genreComboBox->currentIndex());
 
     int productionYear = ui->productionYearSpinBox->value();
 
     int seasonCount = ui->seasonCountSpinBox->value();
 
-    if(!ui->statusList->currentItem())
-    {
-        QMessageBox::warning(this, "Incomplete", "You must select status.");
-        return;
-    }
-
-    SerieStatus status = (SerieStatus)ui->statusList->currentItem()->data(Qt::UserRole).toInt();
+    SerieStatus status = static_cast<SerieStatus>(ui->statusComboBox->currentIndex());
 
     serie.setTitle(title);
     serie.setDescription(description);
@@ -101,8 +90,7 @@ void ModifySerieDialog::updateLists()
     int i = 0;
     for(auto creator : creators)
     {
-        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()));
-        comboBoxIds.push_back(creator.getId());
+        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()), QString::fromStdString(creator.getId()));
         if(creator.getId() == serie.getCreatorId())
         {
             ui->creatorComboBox->setCurrentIndex(i);
@@ -111,30 +99,26 @@ void ModifySerieDialog::updateLists()
     }
 
     auto statuses = { Ongoing, Ended, Cancelled };
-
+    i = 0;
     for(auto status : statuses)
     {
-        QString label = toQString(serieStatusString(status));
-        auto* item = new QListWidgetItem(label);
+        ui->statusComboBox->addItem(QString::fromStdString(serieStatusString(status)), status);
         if(status == serie.getStatus())
         {
-            item->setSelected(true);
+            ui->statusComboBox->setCurrentIndex(i);
         }
-        item->setData(Qt::UserRole, status);
-        ui->statusList->addItem(item);
+        i++;
     }
 
     auto genres = { Adventure };
-
+    i = 0;
     for(auto genre : genres)
     {
-        QString label = toQString(getGenreString(genre));
-        auto* item = new QListWidgetItem(label);
+        ui->genreComboBox->addItem(QString::fromStdString(getGenreString(genre)), genre);
         if(genre == serie.getGenre())
         {
-            item->setSelected(true);
+            ui->genreComboBox->setCurrentIndex(i);
         }
-        item->setData(Qt::UserRole, genre);
-        ui->genreList->addItem(item);
+        i++;
     }
 }

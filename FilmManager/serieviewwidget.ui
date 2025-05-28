@@ -39,28 +39,28 @@
      <item row="0" column="0">
       <widget class="QLabel" name="creatorLabel">
        <property name="text">
-        <string>Creator</string>
+        <string>Twórca</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="productionYearLabel">
        <property name="text">
-        <string>Production year</string>
+        <string>Rok produkcji</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="genreLabel">
        <property name="text">
-        <string>Genre</string>
+        <string>Gatunek</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="markLabel">
        <property name="text">
-        <string>Mark</string>
+        <string>Ocena</string>
        </property>
       </widget>
      </item>
@@ -95,7 +95,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="isWatchedLabel">
        <property name="text">
-        <string>Watched</string>
+        <string>Czy oglądany</string>
        </property>
       </widget>
      </item>
@@ -123,7 +123,7 @@
      <item row="6" column="0">
       <widget class="QLabel" name="seasonLabel">
        <property name="text">
-        <string>Seasons</string>
+        <string>Liczba sezonów</string>
        </property>
       </widget>
      </item>
@@ -142,23 +142,23 @@
    <item>
     <layout class="QHBoxLayout" name="buttonLayout">
      <item>
-      <widget class="QPushButton" name="goBackButton">
+      <widget class="QPushButton" name="addEpisodeButton">
        <property name="text">
-        <string>Go back</string>
+        <string>➕ Dodaj odcinek</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="modifySeriesButton">
        <property name="text">
-        <string>Modify</string>
+        <string>✏️ Modyfikuj</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addEpisodeButton">
+      <widget class="QPushButton" name="goBackButton">
        <property name="text">
-        <string>Add episode</string>
+        <string>⬅️ Wróć</string>
        </property>
       </widget>
      </item>
