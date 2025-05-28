@@ -32,6 +32,8 @@ private:
     QString getStatusName(SerieStatus status);
     void addEpisodeListItem(const Episode& episode);
     QString generateStarRating(double rating);
+    void deleteSelectedEpisode();
+    void refreshEpisodes();
 };
 
 #endif // SERIEVIEWWIDGET_H

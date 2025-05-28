@@ -80,13 +80,6 @@ void AddSerieDialog::updateLists()
     {
         ui->statusComboBox->addItem(QString::fromStdString(serieStatusString(status)), status);
     }
-
-    auto genres = { Adventure };
-
-    for(auto genre : genres)
-    {
-        ui->genreComboBox->addItem(QString::fromStdString(getGenreString(genre)), genre);
-    }
 }
 
 AddSerieDialog::~AddSerieDialog()

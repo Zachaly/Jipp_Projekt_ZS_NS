@@ -23,6 +23,11 @@ SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
     connect(ui->modifyButton, &QPushButton::clicked, this, &SerieListViewWidget::modifySelectedSerie);
     connect(ui->deleteButton, &QPushButton::clicked, this, &SerieListViewWidget::deleteSelectedSerie);
 
+    connect(ui->allSeriesRadio, &QRadioButton::clicked, this, &SerieListViewWidget::updateList);
+    connect(ui->watchedSeriesRadio, &QRadioButton::clicked, this, &SerieListViewWidget::updateList);
+    connect(ui->unwatchedSeriesRadio, &QRadioButton::clicked, this, &SerieListViewWidget::updateList);
+    connect(ui->searchButton, &QPushButton::clicked, this, &SerieListViewWidget::searchSeries);
+
     auto noDirectors = PersonManager::getPeople([](Person p) { return p.getIsDirector(); }).empty();
 
     ui->addSerieButton->setDisabled(noDirectors);
@@ -74,15 +79,15 @@ SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
 QString SerieListViewWidget::getGenreIcon(Genre genre)
 {
     switch (genre) {
-    //case Genre::Action: return "⚔️";
+    case Genre::Action: return "⚔️";
     case Genre::Adventure: return "🗺️";
-    //case Genre::Comedy: return "😄";
-    //case Genre::Drama: return "🎭";
-    //case Genre::Horror: return "👻";
-    //case Genre::Romance: return "💕";
-    //case Genre::SciFi: return "🚀";
-    //case Genre::Thriller: return "🔪";
-    //case Genre::Historical: return "🏛️";
+    case Genre::Comedy: return "😄";
+    case Genre::Drama: return "🎭";
+    case Genre::Horror: return "👻";
+    case Genre::Romance: return "💕";
+    case Genre::SciFi: return "🚀";
+    case Genre::Thriller: return "🔪";
+    case Genre::Historical: return "🏛️";
     default: return "🎬";
     }
 }
@@ -95,7 +100,18 @@ void SerieListViewWidget::searchSeries()
     vector<Serie> searchResults;
 
     if (searchText.isEmpty()) {
-        //searchResults = getFilteredMovies();
+        if(ui->allSeriesRadio->isChecked())
+        {
+            searchResults = SeriesManager::getSeries();
+        }
+        else if(ui->watchedSeriesRadio->isChecked())
+        {
+            searchResults = SeriesManager::getSeries([](Serie s) { return s.getIsWatched(); });
+        }
+        else
+        {
+            searchResults = SeriesManager::getSeries([](Serie s) { return !s.getIsWatched(); });
+        }
     } else {
         if (searchType == "title") {
             string title = searchText.toStdString();
@@ -129,12 +145,11 @@ void SerieListViewWidget::searchSeries()
             }
         }
         else if (searchType == "genre") {
-            auto genres = { Genre::Adventure };
-            for (auto genre : genres) {
-                if (QString::fromStdString(getGenreString(genre)).contains(searchText.toLower())) {
-                    searchResults = SeriesManager::getSeries([genre](Serie s) {
-                        return s.getGenre() == genre;
-                    });
+            QStringList genres = {"Adventure", "Action", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi", "Thriller", "Historical"};
+            for (int i = 0; i < genres.size(); ++i) {
+                if (genres[i].toLower().contains(searchText.toLower())) {
+                    auto genre = static_cast<Genre>(i);
+                    searchResults = SeriesManager::getSeries([genre](Serie s) { return s.getGenre() == genre; });
                     break;
                 }
             }
@@ -150,6 +165,12 @@ void SerieListViewWidget::searchSeries()
         }
     }
 
+    ui->serieList->clear();
+
+    for(auto& s : searchResults)
+    {
+        addSerieListItem(s);
+    }
 }
 
 QString SerieListViewWidget::getGenreName(Genre genre)
@@ -334,7 +355,7 @@ void SerieListViewWidget::deleteSelectedSerie()
             updateList();
         }
     } catch (const std::exception& e) {
-        QMessageBox::warning(this, "Błąd", QString("Nie można znaleźć filmu: %1").arg(e.what()));
+        QMessageBox::warning(this, "Błąd", QString("Nie można znaleźć serialu: %1").arg(e.what()));
     }
 }
 

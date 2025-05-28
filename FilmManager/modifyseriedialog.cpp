@@ -110,15 +110,5 @@ void ModifySerieDialog::updateLists()
         i++;
     }
 
-    auto genres = { Adventure };
-    i = 0;
-    for(auto genre : genres)
-    {
-        ui->genreComboBox->addItem(QString::fromStdString(getGenreString(genre)), genre);
-        if(genre == serie.getGenre())
-        {
-            ui->genreComboBox->setCurrentIndex(i);
-        }
-        i++;
-    }
+    ui->genreComboBox->setCurrentIndex(static_cast<int>(serie.getGenre()));
 }

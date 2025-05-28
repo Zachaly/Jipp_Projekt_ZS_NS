@@ -11,6 +11,8 @@
 #include "FilmManager_Domain/serieStatus.h"
 #include "FilmManager_Domain/episodemanager.h"
 
+#include <QMessageBox>
+
 SerieViewWidget::SerieViewWidget(Serie& serie, MainWindow *parent)
     : QWidget(parent)
     , ui(new Ui::SerieViewWidget),
@@ -21,6 +23,15 @@ SerieViewWidget::SerieViewWidget(Serie& serie, MainWindow *parent)
     connect(ui->modifySeriesButton, SIGNAL(clicked()), this, SLOT(modifySeries()));
     connect(ui->addEpisodeButton, SIGNAL(clicked()), this, SLOT(addEpisode()));
     connect(ui->episodeList ,&QListWidget::itemDoubleClicked,  this, &SerieViewWidget::goToEpisode);
+    connect(ui->deleteEpisodeButton, &QPushButton::clicked, this, &SerieViewWidget::deleteSelectedEpisode);
+    connect(ui->allEpisodesRadio, &QRadioButton::clicked, this, &SerieViewWidget::refreshEpisodes);
+    connect(ui->watchedEpisodesRadio, &QRadioButton::clicked, this, &SerieViewWidget::refreshEpisodes);
+    connect(ui->unwatchedEpisodesRadio, &QRadioButton::clicked, this, &SerieViewWidget::refreshEpisodes);
+
+    connect(ui->episodeList, &QListWidget::itemSelectionChanged, [this]() {
+        bool hasSelection = !ui->episodeList->selectedItems().isEmpty();
+        ui->deleteEpisodeButton->setEnabled(hasSelection);
+    });
 
     ui->episodeList->setStyleSheet(
         "QListWidget {"
@@ -85,18 +96,65 @@ QString SerieViewWidget::generateStarRating(double rating)
     return stars;
 }
 
+void SerieViewWidget::deleteSelectedEpisode()
+{
+    QListWidgetItem* selectedItem = ui->episodeList->currentItem();
+    if (!selectedItem) {
+        return;
+    }
+
+    QString episodeId = selectedItem->data(Qt::UserRole).toString();
+    try {
+        Episode& episode = EpisodeManager::getById(episodeId.toStdString());
+
+        int ret = QMessageBox::question(this, "Usuń odcinek",
+                                        QString("Czy na pewno chcesz usunąć odcinek \"%1\"?")
+                                            .arg(QString::fromStdString(serie.getTitle())),
+                                        QMessageBox::Yes | QMessageBox::No,
+                                        QMessageBox::No);
+
+        if (ret == QMessageBox::Yes) {
+            EpisodeManager::removeEpisode(episodeId.toStdString());
+            updateUi();
+        }
+    } catch (const std::exception& e) {
+        QMessageBox::warning(this, "Błąd", QString("Nie można znaleźć filmu: %1").arg(e.what()));
+    }
+}
+
+void SerieViewWidget::refreshEpisodes()
+{
+    vector<Episode> episodes;
+
+    if(ui->allEpisodesRadio->isChecked())
+    {
+        episodes = EpisodeManager::getEpisodes();
+    }
+    else
+    {
+        bool watched = ui->watchedEpisodesRadio->isChecked();
+        episodes = EpisodeManager::getEpisodes([watched](Episode s) { return s.getIsWatched() == watched; });
+    }
+
+    ui->episodeList->clear();
+
+    for(auto& ep : episodes){
+        addEpisodeListItem(ep);
+    }
+}
+
 QString SerieViewWidget::getGenreName(Genre genre)
 {
     switch (genre) {
-    //case Genre::Action: return "Akcja";
+    case Genre::Action: return "Akcja";
     case Genre::Adventure: return "Przygodowy";
-    //case Genre::Comedy: return "Komedia";
-    //case Genre::Drama: return "Dramat";
-    //case Genre::Horror: return "Horror";
-    //case Genre::Romance: return "Romans";
-    //case Genre::SciFi: return "Sci-Fi";
-    //case Genre::Thriller: return "Thriller";
-    //case Genre::Historical: return "Historyczny";
+    case Genre::Comedy: return "Komedia";
+    case Genre::Drama: return "Dramat";
+    case Genre::Horror: return "Horror";
+    case Genre::Romance: return "Romans";
+    case Genre::SciFi: return "Sci-Fi";
+    case Genre::Thriller: return "Thriller";
+    case Genre::Historical: return "Historyczny";
     default: return "Nieznany";
     }
 }
@@ -265,19 +323,11 @@ void SerieViewWidget::updateUi()
 {
     auto& creator = PersonManager::getPersonById(serie.getCreatorId());
 
-    auto episodes = EpisodeManager::getEpisodes([this](Episode ep) {
-        return ep.getSeriesId() == serie.getId();
-    });
-
-    ui->episodeList->clear();
-
-    for(auto& ep : episodes){
-        addEpisodeListItem(ep);
-    }
+    refreshEpisodes();
 
     ui->creatorValueLabel->setText(toQString(creator.getFirstName() + " " + creator.getLastName()));
-    ui->genreValueLabel->setText(toQString(getGenreString(serie.getGenre())));
-    ui->isWatchedValueLabel->setText(toQString(serie.getIsWatched() ? "Yes" : "No"));
+    ui->genreValueLabel->setText(getGenreName(serie.getGenre()));
+    ui->isWatchedValueLabel->setText(serie.getIsWatched() ? "Tak" : "Nie");
     ui->markValueLabel->setText(toQString(to_string(serie.getMark())));
     ui->descriptionLabel->setText(toQString(serie.getDescription()));
     ui->titleLabel->setText(toQString(serie.getTitle()));

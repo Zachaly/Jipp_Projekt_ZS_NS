@@ -13,7 +13,10 @@ vector<Episode> &EpisodeManager::getEpisodes(function<bool (Episode)> filter)
 
     for(auto& e : episodes)
     {
-        res->push_back(e);
+        if(filter(e))
+        {
+            res->push_back(e);
+        }
     }
 
     return *res;
