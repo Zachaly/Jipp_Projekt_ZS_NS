@@ -18,7 +18,7 @@
     <widget class="QLabel" name="titleLabel">
      <property name="font">
       <font>
-       <pointsize>14</pointsize>
+       <pointsize>16</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -34,44 +34,41 @@
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="nameLabel">
-       <property name="text">
-        <string>Name:</string>
-       </property>
+       <property name="text"><string>Name:</string></property>
+       <property name="font"><font><pointsize>12</pointsize><bold>true</bold></font></property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="personNameLabel">
-       <property name="text">
-        <string/>
-       </property>
+       <property name="text"><string/></property>
+       <property name="font"><font><pointsize>14</pointsize><bold>true</bold></font></property>
+       <property name="styleSheet"><string notr="true">color: #2E86C1;</string></property>
       </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="birthDateTextLabel">
-       <property name="text">
-        <string>Birth Date:</string>
-       </property>
+       <property name="text"><string>Birth Date:</string></property>
+       <property name="font"><font><pointsize>12</pointsize><bold>true</bold></font></property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLabel" name="birthDateLabel">
-       <property name="text">
-        <string/>
-       </property>
+       <property name="text"><string/></property>
+       <property name="font"><font><pointsize>13</pointsize></font></property>
+       <property name="styleSheet"><string notr="true">color: #117A65;</string></property>
       </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="roleLabel">
-       <property name="text">
-        <string>Role:</string>
-       </property>
+       <property name="text"><string>Role:</string></property>
+       <property name="font"><font><pointsize>12</pointsize><bold>true</bold></font></property>
       </widget>
      </item>
      <item row="2" column="1">
       <widget class="QLabel" name="personRoleLabel">
-       <property name="text">
-        <string/>
-       </property>
+       <property name="text"><string/></property>
+       <property name="font"><font><pointsize>13</pointsize></font></property>
+       <property name="styleSheet"><string notr="true">color: #D35400;</string></property>
       </widget>
      </item>
     </layout>
@@ -80,15 +77,29 @@
     <layout class="QHBoxLayout" name="buttonLayout">
      <item>
       <widget class="QPushButton" name="modifyButton">
-       <property name="text">
-        <string>Modify</string>
+       <property name="text"><string>Modify</string></property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #2E86C1; color: white; border-radius: 4px; padding: 6px;</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="goBackButton">
-       <property name="text">
-        <string>Go Back</string>
+       <property name="text"><string>Go Back</string></property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #2E86C1; color: white; border-radius: 4px; padding: 6px;</string>
        </property>
       </widget>
      </item>
