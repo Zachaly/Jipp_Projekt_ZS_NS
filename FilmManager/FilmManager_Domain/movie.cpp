@@ -1,24 +1,23 @@
 #include "movie.h"
-#include <sstream>
+#include <algorithm>
 
-using namespace std;
+Movie::Movie() : TitleEntry(), length(0) {}
 
-Movie::Movie() : TitleEntry() {}
-
-Movie::Movie(string title, string description, Genre genre, string creatorId, int productionYear, int mark, bool isWatched, int length, vector<string> actorIds)
-    : TitleEntry(title, description, genre, creatorId, productionYear, mark, isWatched)
+Movie::Movie(const std::string& title, const std::string& description, Genre genre,
+             const std::string& creatorId, int productionYear, int mark, bool isWatched,
+             int length, const std::vector<std::string>& actorIds)
+    : TitleEntry(title, description, genre, creatorId, productionYear, mark, isWatched),
+    length(length), actorIds(actorIds)
 {
-    this->length = length;
-    this->actorIds = actorIds;
 }
 
-Movie::Movie(string id, string title, string description, Genre genre, string creatorId, int productionYear, int mark, bool isWatched, int length, vector<string> actorIds)
-    : TitleEntry(id, title, description, genre, creatorId, productionYear, mark, isWatched)
+Movie::Movie(const std::string& id, const std::string& title, const std::string& description,
+             Genre genre, const std::string& creatorId, int productionYear, int mark, bool isWatched,
+             int length, const std::vector<std::string>& actorIds)
+    : TitleEntry(id, title, description, genre, creatorId, productionYear, mark, isWatched),
+    length(length), actorIds(actorIds)
 {
-    this->length = length;
-    this->actorIds = actorIds;
 }
-
 
 int Movie::getLength() const
 {
@@ -30,28 +29,24 @@ void Movie::setLength(int newLength)
     length = newLength;
 }
 
-vector<string> Movie::getActorIds() const
+const std::vector<std::string>& Movie::getActorIds() const
 {
     return actorIds;
 }
 
-void Movie::setActorIds(const vector<string> &newActorIds)
+void Movie::setActorIds(const std::vector<std::string>& newActorIds)
 {
     actorIds = newActorIds;
 }
 
-string Movie::toString()
+void Movie::addActor(const std::string& actorId)
 {
-    stringstream stream;
-    stream << stringify() << " " << length;
-    for(auto i = actorIds.cbegin(); i != actorIds.cend(); i++)
-    {
-        stream << " " << *i;
+    if (std::find(actorIds.begin(), actorIds.end(), actorId) == actorIds.end()) {
+        actorIds.push_back(actorId);
     }
-    return stream.str();
 }
 
-string Movie::stringify()
+void Movie::removeActor(const std::string& actorId)
 {
-    return TitleEntry::stringify();
+    actorIds.erase(std::remove(actorIds.begin(), actorIds.end(), actorId), actorIds.end());
 }

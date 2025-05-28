@@ -7,12 +7,16 @@ class Entry
 {
 public:
     Entry();
-    Entry(string id);
+    Entry(const string& id);
+    virtual ~Entry() = default;
+
     string getId() const;
-    virtual string toString() = 0;
+
 protected:
-    string id;
     string generateId();
+
+private:
+    string id;
 };
 
 #endif // ENTRY_H
