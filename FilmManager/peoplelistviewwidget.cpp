@@ -5,26 +5,20 @@
 #include "ui_peoplelistviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/qstringhelpers.h"
-
 #include <QMessageBox>
 #include <QListWidgetItem>
-
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QFrame>
 
 PeopleListViewWidget::PeopleListViewWidget(MainWindow *parent)
     : QWidget(parent)
     , ui(new Ui::PeopleListViewWidget)
 {
     ui->setupUi(this);
-
-    ui->directorsCheckBox->setChecked(true);
-    ui->actorsCheckBox->setChecked(true);
-
-    connect(ui->goBackButton,    &QPushButton::clicked,            this, &PeopleListViewWidget::goBack);
-    connect(ui->addPersonButton, &QPushButton::clicked,            this, &PeopleListViewWidget::addPerson);
-    connect(ui->peopleListWidget,&QListWidget::itemDoubleClicked,  this, &PeopleListViewWidget::goToPerson);
-    connect(ui->directorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::refreshPeopleList);
-    connect(ui->actorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::refreshPeopleList);
-
+    setupConnections();
+    setupListWidget();
     refreshPeopleList();
 }
 
@@ -33,66 +27,224 @@ PeopleListViewWidget::~PeopleListViewWidget()
     delete ui;
 }
 
-void PeopleListViewWidget::refreshPeopleList()
+void PeopleListViewWidget::setupConnections()
+{
+    connect(ui->goBackButton, &QPushButton::clicked, this, &PeopleListViewWidget::goBack);
+    connect(ui->addPersonButton, &QPushButton::clicked, this, &PeopleListViewWidget::addPerson);
+    connect(ui->peopleListWidget, &QListWidget::itemDoubleClicked, this, &PeopleListViewWidget::goToPerson);
+    connect(ui->directorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::onFilterChanged);
+    connect(ui->actorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::onFilterChanged);
+}
+
+void PeopleListViewWidget::setupListWidget()
+{
+    ui->peopleListWidget->setStyleSheet(
+        "QListWidget {"
+        "    outline: none;"
+        "    border: 2px solid #dee2e6;"
+        "    border-radius: 8px;"
+        "    background-color: white;"
+        "    selection-background-color: #e6f3ff;"
+        "}"
+        "QListWidget::item {"
+        "    padding: 0px;"
+        "    border-bottom: 1px solid #eee;"
+        "    min-height: 100px;"
+        "    margin: 2px;"
+        "    border-radius: 6px;"
+        "}"
+        "QListWidget::item:selected {"
+        "    background-color: #e6f3ff;"
+        "    border: 2px solid #007bff;"
+        "}"
+        "QListWidget::item:hover {"
+        "    background-color: #f8f9fa;"
+        "    border: 1px solid #dee2e6;"
+        "}"
+        "QListWidget::item:selected:hover {"
+        "    background-color: #cce7ff;"
+        "    border: 2px solid #0056b3;"
+        "}"
+        );
+}
+
+QString PeopleListViewWidget::getRoleIcon(const Person& person)
+{
+    if (person.getIsDirector() && person.getIsActor()) {
+        return "🎭🎬";
+    } else if (person.getIsDirector()) {
+        return "🎬";
+    } else if (person.getIsActor()) {
+        return "🎭";
+    }
+    return "👤";
+}
+
+QString PeopleListViewWidget::getRoleText(const Person& person)
+{
+    if (person.getIsDirector() && person.getIsActor()) {
+        return "Reżyser & Aktor";
+    } else if (person.getIsDirector()) {
+        return "Reżyser";
+    } else if (person.getIsActor()) {
+        return "Aktor";
+    }
+    return "Osoba";
+}
+
+void PeopleListViewWidget::createPersonListItem(const Person& person)
+{
+    QWidget* itemWidget = new QWidget();
+    itemWidget->setFixedHeight(90);
+
+    QHBoxLayout* mainLayout = new QHBoxLayout(itemWidget);
+    mainLayout->setContentsMargins(15, 10, 15, 10);
+    mainLayout->setSpacing(15);
+
+    // Role icon label
+    QLabel* roleIconLabel = new QLabel();
+    roleIconLabel->setText(getRoleIcon(person));
+    roleIconLabel->setStyleSheet("font-size: 28px; color: #007bff;");
+    roleIconLabel->setFixedSize(50, 50);
+    roleIconLabel->setAlignment(Qt::AlignCenter);
+    roleIconLabel->setStyleSheet(roleIconLabel->styleSheet() +
+                                 "background-color: #f0f8ff; border-radius: 25px; border: 2px solid #007bff;");
+
+    // Info layout
+    QVBoxLayout* infoLayout = new QVBoxLayout();
+    infoLayout->setSpacing(5);
+
+    // Name label
+    QLabel* nameLabel = new QLabel();
+    QString fullName = QString("%1 %2")
+                           .arg(QString::fromStdString(person.getFirstName()))
+                           .arg(QString::fromStdString(person.getLastName()));
+    nameLabel->setText(fullName.toUpper());
+    nameLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #212529; margin-bottom: 5px;");
+
+    // Role label
+    QLabel* roleLabel = new QLabel();
+    roleLabel->setText(QString("rola: %1").arg(getRoleText(person)));
+    roleLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: normal;");
+
+    // Person ID label (for debugging purposes)
+    QLabel* idLabel = new QLabel();
+    idLabel->setText(QString("ID: %1").arg(QString::fromStdString(person.getId())));
+    idLabel->setStyleSheet("font-size: 10px; color: #adb5bd; font-weight: normal;");
+
+    infoLayout->addWidget(nameLabel);
+    infoLayout->addWidget(roleLabel);
+    infoLayout->addWidget(idLabel);
+    infoLayout->addStretch();
+
+    // Right layout for additional info
+    QVBoxLayout* rightLayout = new QVBoxLayout();
+    rightLayout->setAlignment(Qt::AlignTop | Qt::AlignRight);
+
+    // Status badge
+    QLabel* statusLabel = new QLabel();
+    if (person.getIsDirector() && person.getIsActor()) {
+        statusLabel->setText("🌟 Multitalent");
+        statusLabel->setStyleSheet("font-size: 12px; color: #dc3545; font-weight: bold; "
+                                   "background-color: #f8d7da; padding: 4px 8px; border-radius: 12px; "
+                                   "border: 1px solid #f5c6cb;");
+    } else if (person.getIsDirector()) {
+        statusLabel->setText("🎬 Reżyser");
+        statusLabel->setStyleSheet("font-size: 12px; color: #856404; font-weight: bold; "
+                                   "background-color: #fff3cd; padding: 4px 8px; border-radius: 12px; "
+                                   "border: 1px solid #ffeaa7;");
+    } else if (person.getIsActor()) {
+        statusLabel->setText("🎭 Aktor");
+        statusLabel->setStyleSheet("font-size: 12px; color: #155724; font-weight: bold; "
+                                   "background-color: #d4edda; padding: 4px 8px; border-radius: 12px; "
+                                   "border: 1px solid #c3e6cb;");
+    } else {
+        statusLabel->setText("👤 Osoba");
+        statusLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: bold; "
+                                   "background-color: #f8f9fa; padding: 4px 8px; border-radius: 12px; "
+                                   "border: 1px solid #dee2e6;");
+    }
+    statusLabel->setAlignment(Qt::AlignRight);
+
+    rightLayout->addWidget(statusLabel);
+    rightLayout->addStretch();
+
+    mainLayout->addWidget(roleIconLabel);
+    mainLayout->addLayout(infoLayout, 1);
+    mainLayout->addLayout(rightLayout);
+
+    QListWidgetItem* item = new QListWidgetItem();
+    item->setData(Qt::UserRole, QString::fromStdString(person.getId()));
+    item->setSizeHint(itemWidget->sizeHint());
+
+    ui->peopleListWidget->addItem(item);
+    ui->peopleListWidget->setItemWidget(item, itemWidget);
+}
+
+void PeopleListViewWidget::displayPeople(const vector<Person>& people)
 {
     ui->peopleListWidget->clear();
+    currentPeople = people;
 
+    for (const auto& person : people) {
+        createPersonListItem(person);
+    }
+}
+
+void PeopleListViewWidget::updatePeopleList()
+{
+    vector<Person> filteredPeople = getFilteredPeople();
+    displayPeople(filteredPeople);
+}
+
+vector<Person> PeopleListViewWidget::getFilteredPeople()
+{
     const bool directors = ui->directorsCheckBox->isChecked();
     const bool actors = ui->actorsCheckBox->isChecked();
 
-    vector<Person> data;
+    vector<Person> result;
 
-    if(directors && actors)
-    {
-        data = PersonManager::getPeople();
-    }
-    else if(directors)
-    {
-        data = PersonManager::getPeople([](Person p){
+    if (directors && actors) {
+        result = PersonManager::getPeople();
+    } else if (directors) {
+        result = PersonManager::getPeople([](Person p) {
             return p.getIsDirector();
         });
-    }
-    else if(actors)
-    {
-        data = PersonManager::getPeople([](Person p){
+    } else if (actors) {
+        result = PersonManager::getPeople([](Person p) {
             return p.getIsActor();
         });
     }
 
-    for (const auto& p : data) {
+    return result;
+}
 
-        string role = "";
+void PeopleListViewWidget::refreshPeopleList()
+{
+    updatePeopleList();
+}
 
-        if(p.getIsDirector())
-        {
-            role += "Director ";
-        }
-        if(p.getIsActor())
-        {
-            role += "Actor ";
-        }
-
-        QString label = toQString(role + p.getFirstName() + " " + p.getLastName());
-        auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, toQString(p.getId()));
-        ui->peopleListWidget->addItem(item);
-    }
+void PeopleListViewWidget::onFilterChanged()
+{
+    updatePeopleList();
 }
 
 void PeopleListViewWidget::goToPerson()
 {
     auto* item = ui->peopleListWidget->currentItem();
     if (!item) {
-        QMessageBox::warning(this, "No Selection", "Please select a person from the list.");
+        QMessageBox::warning(this, "Brak wyboru", "Proszę wybrać osobę z listy.");
         return;
     }
 
-    std::string id = fromQString(item->data(Qt::UserRole).toString());
-    Person& p = PersonManager::getPersonById(id);
-
-
-    auto* editView = new PersonViewWidget(p, qobject_cast<MainWindow*>(parent()));
-    qobject_cast<MainWindow*>(parent())->changePage(editView);
+    std::string id = item->data(Qt::UserRole).toString().toStdString();
+    try {
+        Person& p = PersonManager::getPersonById(id);
+        auto* editView = new PersonViewWidget(p, qobject_cast<MainWindow*>(parent()));
+        qobject_cast<MainWindow*>(parent())->changePage(editView);
+    } catch (const std::exception& e) {
+        QMessageBox::warning(this, "Błąd", QString("Nie można znaleźć osoby: %1").arg(e.what()));
+    }
 }
 
 void PeopleListViewWidget::addPerson()
@@ -100,9 +252,8 @@ void PeopleListViewWidget::addPerson()
     auto* dlg = new AddPersonDialog(this);
     connect(dlg, &AddPersonDialog::accepted, this, &PeopleListViewWidget::refreshPeopleList);
     connect(dlg, &AddPersonDialog::rejected, this, [this]() {
-        QMessageBox::information(this, "Info", "Adding person canceled.");
+        QMessageBox::information(this, "Info", "Dodawanie osoby anulowane.");
     });
-
     dlg->exec();
     delete dlg;
 }
