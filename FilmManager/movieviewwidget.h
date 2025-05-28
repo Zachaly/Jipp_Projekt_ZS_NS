@@ -1,30 +1,38 @@
 #ifndef MOVIEVIEWWIDGET_H
 #define MOVIEVIEWWIDGET_H
 
-#include "FilmManager_Domain/movie.h"
-#include "mainwindow.h"
-
 #include <QWidget>
+#include "FilmManager_Domain/movie.h"
+using namespace std;
 
-namespace Ui {
-class MovieViewWidget;
-}
+QT_BEGIN_NAMESPACE
+namespace Ui { class MovieViewWidget; }
+QT_END_NAMESPACE
 
 class MovieViewWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MovieViewWidget(Movie& movie, MainWindow *parent = nullptr);
+    MovieViewWidget(QWidget *parent = nullptr);
     ~MovieViewWidget();
 
-public Q_SLOTS:
-    void modifyMovie();
+    void displayMovie(const Movie& movie);
+    void clearDisplay();
     void goBack();
 
+signals:
+    void editMovieRequested(const string& movieId);
+
+private slots:
+    void editCurrentMovie();
+
 private:
+    void updateActorsList(const vector<string>& actorIds);
+    void updateDirectorInfo(const string& directorId);
+
     Ui::MovieViewWidget *ui;
-    Movie& movie;
+    string currentMovieId;
 };
 
 #endif // MOVIEVIEWWIDGET_H
