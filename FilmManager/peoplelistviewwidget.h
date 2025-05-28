@@ -26,6 +26,8 @@ private slots:
     void goBack();
     void refreshPeopleList();
     void onFilterChanged();
+    void onSelectionChanged();
+    void removeSelectedPerson();
 
 private:
     void setupConnections();
