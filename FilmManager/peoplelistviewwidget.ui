@@ -152,7 +152,7 @@ QLabel {
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -167,12 +167,6 @@ QLabel {
    </item>
    <item>
     <widget class="QListWidget" name="peopleListWidget">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
      <property name="styleSheet">
       <string>QListWidget {
     outline: none;
@@ -206,6 +200,12 @@ QListWidget::item:selected:hover {
     border: 2px solid #0056b3;
 }</string>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+     </property>
      <property name="spacing">
       <number>5</number>
      </property>
@@ -218,9 +218,6 @@ QListWidget::item:selected:hover {
      </property>
      <item>
       <widget class="QPushButton" name="addPersonButton">
-       <property name="text">
-        <string>➕ Dodaj osobę</string>
-       </property>
        <property name="styleSheet">
         <string>QPushButton {
     background-color: #28a745;
@@ -235,12 +232,44 @@ QPushButton:pressed {
     background-color: #1e7e34;
 }</string>
        </property>
+       <property name="text">
+        <string>➕ Dodaj osobę</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="removeButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string>QPushButton {
+    background-color: #dc3545;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #c82333;
+}
+
+QPushButton:pressed {
+    background-color: #bd2130;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}</string>
+       </property>
+       <property name="text">
+        <string>🗑️ Usuń</string>
+       </property>
       </widget>
      </item>
      <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -252,9 +281,6 @@ QPushButton:pressed {
      </item>
      <item>
       <widget class="QPushButton" name="goBackButton">
-       <property name="text">
-        <string>⬅️ Wróć</string>
-       </property>
        <property name="styleSheet">
         <string>QPushButton {
     background-color: #6c757d;
@@ -268,6 +294,9 @@ QPushButton:hover {
 QPushButton:pressed {
     background-color: #545b62;
 }</string>
+       </property>
+       <property name="text">
+        <string>⬅️ Wróć</string>
        </property>
       </widget>
      </item>
