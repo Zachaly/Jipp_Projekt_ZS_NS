@@ -31,7 +31,9 @@ void PeopleListViewWidget::setupConnections()
 {
     connect(ui->goBackButton, &QPushButton::clicked, this, &PeopleListViewWidget::goBack);
     connect(ui->addPersonButton, &QPushButton::clicked, this, &PeopleListViewWidget::addPerson);
+    connect(ui->removeButton, &QPushButton::clicked, this, &PeopleListViewWidget::removeSelectedPerson);
     connect(ui->peopleListWidget, &QListWidget::itemDoubleClicked, this, &PeopleListViewWidget::goToPerson);
+    connect(ui->peopleListWidget, &QListWidget::itemSelectionChanged, this, &PeopleListViewWidget::onSelectionChanged);
     connect(ui->directorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::onFilterChanged);
     connect(ui->actorsCheckBox, &QCheckBox::checkStateChanged, this, &PeopleListViewWidget::onFilterChanged);
 }
@@ -101,7 +103,7 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     mainLayout->setContentsMargins(15, 10, 15, 10);
     mainLayout->setSpacing(15);
 
-    // Role icon label
+
     QLabel* roleIconLabel = new QLabel();
     roleIconLabel->setText(getRoleIcon(person));
     roleIconLabel->setStyleSheet("font-size: 28px; color: #007bff;");
@@ -110,11 +112,11 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleIconLabel->setStyleSheet(roleIconLabel->styleSheet() +
                                  "background-color: #f0f8ff; border-radius: 25px; border: 2px solid #007bff;");
 
-    // Info layout
+
     QVBoxLayout* infoLayout = new QVBoxLayout();
     infoLayout->setSpacing(5);
 
-    // Name label
+
     QLabel* nameLabel = new QLabel();
     QString fullName = QString("%1 %2")
                            .arg(QString::fromStdString(person.getFirstName()))
@@ -122,12 +124,11 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     nameLabel->setText(fullName.toUpper());
     nameLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #212529; margin-bottom: 5px;");
 
-    // Role label
     QLabel* roleLabel = new QLabel();
     roleLabel->setText(QString("rola: %1").arg(getRoleText(person)));
     roleLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: normal;");
 
-    // Person ID label (for debugging purposes)
+
     QLabel* idLabel = new QLabel();
     idLabel->setText(QString("ID: %1").arg(QString::fromStdString(person.getId())));
     idLabel->setStyleSheet("font-size: 10px; color: #adb5bd; font-weight: normal;");
@@ -137,11 +138,11 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     infoLayout->addWidget(idLabel);
     infoLayout->addStretch();
 
-    // Right layout for additional info
+
     QVBoxLayout* rightLayout = new QVBoxLayout();
     rightLayout->setAlignment(Qt::AlignTop | Qt::AlignRight);
 
-    // Status badge
+
     QLabel* statusLabel = new QLabel();
     if (person.getIsDirector() && person.getIsActor()) {
         statusLabel->setText("🌟 Multitalent");
@@ -256,6 +257,37 @@ void PeopleListViewWidget::addPerson()
     });
     dlg->exec();
     delete dlg;
+}
+void PeopleListViewWidget::onSelectionChanged()
+{
+    bool hasSelection = ui->peopleListWidget->currentItem() != nullptr;
+    ui->removeButton->setEnabled(hasSelection);
+}
+
+void PeopleListViewWidget::removeSelectedPerson()
+{
+    auto* item = ui->peopleListWidget->currentItem();
+    if (!item) {
+        QMessageBox::warning(this, "Brak wyboru", "Proszę wybrać osobę do usunięcia.");
+        return;
+    }
+
+    std::string id = item->data(Qt::UserRole).toString().toStdString();
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Potwierdzenie",
+                                  "Czy na pewno chcesz usunąć wybraną osobę?",
+                                  QMessageBox::Yes|QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        try {
+            PersonManager::removePerson(id);
+            refreshPeopleList();
+            QMessageBox::information(this, "Sukces", "Osoba została usunięta.");
+        } catch (const std::exception& e) {
+            QMessageBox::critical(this, "Błąd", QString("Nie udało się usunąć osoby: %1").arg(e.what()));
+        }
+    }
 }
 
 void PeopleListViewWidget::goBack()
