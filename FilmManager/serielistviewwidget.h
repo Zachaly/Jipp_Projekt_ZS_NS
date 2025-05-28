@@ -32,6 +32,7 @@ private:
     void addSerieListItem(const Serie& serie);
     void deleteSelectedSerie();
     void modifySelectedSerie();
+    void searchSeries();
 };
 
 #endif // SERIELISTVIEWWIDGET_H

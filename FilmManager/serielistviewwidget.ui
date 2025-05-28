@@ -132,22 +132,99 @@ QLabel {
     color: #495057;
     font-weight: normal;</string>
   </property>
-  <layout class="QVBoxLayout" name="mainLayout">
-   <property name="spacing">
-    <number>15</number>
-   </property>
-   <property name="leftMargin">
-    <number>20</number>
-   </property>
-   <property name="topMargin">
-    <number>20</number>
-   </property>
-   <property name="rightMargin">
-    <number>20</number>
-   </property>
-   <property name="bottomMargin">
-    <number>20</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="searchGroupBox">
+     <property name="styleSheet">
+      <string>QGroupBox {
+    margin-bottom: 10px;
+}</string>
+     </property>
+     <property name="title">
+      <string>🔍 Wyszukiwanie</string>
+     </property>
+     <layout class="QHBoxLayout" name="searchLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string>font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>Szukaj:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="searchLineEdit">
+        <property name="styleSheet">
+         <string>QLineEdit {
+    min-width: 250px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Wprowadź frazę do wyszukania...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="styleSheet">
+         <string>font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>po:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="searchTypeComboBox">
+        <property name="minimumSize">
+         <size>
+          <width>148</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="searchButton">
+        <property name="styleSheet">
+         <string>QPushButton {
+    background-color: #28a745;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #218838;
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;
+}</string>
+        </property>
+        <property name="text">
+         <string>🔍 Szukaj</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item>
     <widget class="QListWidget" name="serieList"/>
    </item>

@@ -62,6 +62,12 @@ SerieListViewWidget::SerieListViewWidget(MainWindow *parent)
         "}"
         );
 
+    ui->searchTypeComboBox->clear();
+    ui->searchTypeComboBox->addItem("Tytule", "title");
+    ui->searchTypeComboBox->addItem("Twórcy", "creator");
+    ui->searchTypeComboBox->addItem("Gatunku", "genre");
+    ui->searchTypeComboBox->addItem("Roku produkcji", "year");
+
     updateList();
 }
 
@@ -79,6 +85,71 @@ QString SerieListViewWidget::getGenreIcon(Genre genre)
     //case Genre::Historical: return "🏛️";
     default: return "🎬";
     }
+}
+
+void SerieListViewWidget::searchSeries()
+{
+    QString searchText = ui->searchLineEdit->text().trimmed();
+    QString searchType = ui->searchTypeComboBox->currentData().toString();
+
+    vector<Serie> searchResults;
+
+    if (searchText.isEmpty()) {
+        //searchResults = getFilteredMovies();
+    } else {
+        if (searchType == "title") {
+            string title = searchText.toStdString();
+            searchResults = SeriesManager::getSeries([title](Serie s) {
+                string lowerTitle = title;
+                transform(lowerTitle.begin(), lowerTitle.end(), lowerTitle.begin(),
+                               [](unsigned char c){ return std::tolower(c); });
+
+                std::string serieTitle = s.getTitle();
+                std::transform(serieTitle.begin(), serieTitle.end(), serieTitle.begin(),
+                               [](unsigned char c){ return std::tolower(c); });
+
+                return serieTitle.find(lowerTitle) != std::string::npos;
+            });
+        }
+        else if (searchType == "creator") {
+            string creatorId;
+            vector<Person> people = PersonManager::getPeople();
+            for (const auto& person : people) {
+                QString fullName = QString("%1 %2").arg(QString::fromStdString(person.getFirstName()))
+                .arg(QString::fromStdString(person.getLastName()));
+                if (fullName.toLower().contains(searchText.toLower())) {
+                    creatorId = person.getId();
+                    break;
+                }
+            }
+            if (!creatorId.empty()) {
+                searchResults = SeriesManager::getSeries([creatorId](Serie s) {
+                    return creatorId == s.getCreatorId();
+                });
+            }
+        }
+        else if (searchType == "genre") {
+            auto genres = { Genre::Adventure };
+            for (auto genre : genres) {
+                if (QString::fromStdString(getGenreString(genre)).contains(searchText.toLower())) {
+                    searchResults = SeriesManager::getSeries([genre](Serie s) {
+                        return s.getGenre() == genre;
+                    });
+                    break;
+                }
+            }
+        }
+        else if (searchType == "year") {
+            bool ok;
+            int year = searchText.toInt(&ok);
+            if (ok) {
+                searchResults = SeriesManager::getSeries([year](Serie s) {
+                    return s.getProductionYear() == year;
+                });
+            };
+        }
+    }
+
 }
 
 QString SerieListViewWidget::getGenreName(Genre genre)
