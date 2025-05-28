@@ -15,9 +15,10 @@ public:
     static std::string addPerson(const std::string& firstName, const std::string& lastName,
                                  int birthYear, int birthMonth, int birthDay, bool isActor, bool isDirector);
 
-    static void loadSampleData();
+    static void removePerson(const std::string& id);
 
     static std::vector<Person>& getPeople(function<bool(Person)> filter);
+
 private:
     static std::vector<Person> people;
 };
