@@ -19,7 +19,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="labelFirstName">
        <property name="text">
-        <string>First Name:</string>
+        <string>Imię</string>
        </property>
       </widget>
      </item>
@@ -29,7 +29,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="labelLastName">
        <property name="text">
-        <string>Last Name:</string>
+        <string>Nazwisko</string>
        </property>
       </widget>
      </item>
@@ -39,7 +39,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="labelBirthDate">
        <property name="text">
-        <string>Birth Date:</string>
+        <string>Data urodzenia</string>
        </property>
       </widget>
      </item>
@@ -110,14 +110,14 @@
      <item row="3" column="0">
       <widget class="QCheckBox" name="actorCheckBox">
        <property name="text">
-        <string>Actor</string>
+        <string>Aktor</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
       <widget class="QCheckBox" name="directorCheckBox">
        <property name="text">
-        <string>Director</string>
+        <string>Reżyser</string>
        </property>
       </widget>
      </item>
