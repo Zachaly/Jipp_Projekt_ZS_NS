@@ -25,6 +25,7 @@ public Q_SLOTS:
 private:
     Ui::EpisodeViewWidget *ui;
     Episode& episode;
+    void updateUi();
 };
 
 #endif // EPISODEVIEWWIDGET_H

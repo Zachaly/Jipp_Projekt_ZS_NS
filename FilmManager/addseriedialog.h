@@ -15,8 +15,16 @@ public:
     explicit AddSerieDialog(QWidget *parent = nullptr);
     ~AddSerieDialog();
 
+signals:
+    void serieAdded();
+
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::AddSerieDialog *ui;
+    void updateLists();
+    std::vector<std::string> comboBoxIds;
 };
 
 #endif // ADDSERIEDIALOG_H

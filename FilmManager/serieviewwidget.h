@@ -1,6 +1,7 @@
 #ifndef SERIEVIEWWIDGET_H
 #define SERIEVIEWWIDGET_H
 
+#include "FilmManager_Domain/episode.h"
 #include "FilmManager_Domain/serie.h"
 #include "mainwindow.h"
 
@@ -21,10 +22,18 @@ public Q_SLOTS:
     void goBack();
     void goToEpisode();
     void modifySeries();
+    void addEpisode();
 
 private:
     Ui::SerieViewWidget *ui;
     Serie& serie;
+    void updateUi();
+    QString getGenreName(Genre genre);
+    QString getStatusName(SerieStatus status);
+    void addEpisodeListItem(const Episode& episode);
+    QString generateStarRating(double rating);
+    void deleteSelectedEpisode();
+    void refreshEpisodes();
 };
 
 #endif // SERIEVIEWWIDGET_H

@@ -347,7 +347,7 @@ QLabel {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>450</width>
+           <width>448</width>
            <height>148</height>
           </rect>
          </property>
