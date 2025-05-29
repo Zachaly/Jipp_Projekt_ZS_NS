@@ -10,7 +10,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>
-#include <QFrame>
 
 PeopleListViewWidget::PeopleListViewWidget(MainWindow *parent)
     : QWidget(parent)
@@ -129,13 +128,8 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: normal;");
 
 
-    QLabel* idLabel = new QLabel();
-    idLabel->setText(QString("ID: %1").arg(QString::fromStdString(person.getId())));
-    idLabel->setStyleSheet("font-size: 10px; color: #adb5bd; font-weight: normal;");
-
     infoLayout->addWidget(nameLabel);
     infoLayout->addWidget(roleLabel);
-    infoLayout->addWidget(idLabel);
     infoLayout->addStretch();
 
 
