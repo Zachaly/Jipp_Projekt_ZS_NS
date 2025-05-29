@@ -409,7 +409,22 @@ void SerieListViewWidget::addSerie()
 void SerieListViewWidget::updateList()
 {
     ui->serieList->clear();
-    for(auto& s : SeriesManager::getSeries())
+
+    vector<Serie> series;
+
+    if(ui->allSeriesRadio->isChecked())
+    {
+        series = SeriesManager::getSeries();
+    }
+    else if(ui->watchedSeriesRadio->isChecked()){
+        series = SeriesManager::getSeries([](Serie s) { return s.getIsWatched(); });
+    }
+    else {
+        series = SeriesManager::getSeries([](Serie s) { return !s.getIsWatched(); });
+    }
+
+
+    for(auto& s : series)
     {
         addSerieListItem(s);
     }
