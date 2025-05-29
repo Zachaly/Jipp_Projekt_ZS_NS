@@ -34,7 +34,7 @@ void AddMovieDialog::populateDirectors()
 {
     ui->directorComboBox->clear();
 
-    for (const auto& person : PersonManager::getPeople()) {
+    for (const auto& person : PersonManager::getPeople([](Person p) { return p.getIsDirector(); })) {
         QString displayName = QString("%1 %2").arg(QString::fromStdString(person.getFirstName()))
         .arg(QString::fromStdString(person.getLastName()));
         ui->directorComboBox->addItem(displayName, QString::fromStdString(person.getId()));
@@ -48,7 +48,7 @@ void AddMovieDialog::populateActors()
     }
     actorCheckBoxes.clear();
 
-    for (const auto& person : PersonManager::getPeople()) {
+    for (const auto& person : PersonManager::getPeople([](Person p) { return p.getIsActor(); })) {
         QString displayName = QString("%1 %2").arg(QString::fromStdString(person.getFirstName()))
         .arg(QString::fromStdString(person.getLastName()));
         QCheckBox* checkBox = new QCheckBox(displayName, this);
