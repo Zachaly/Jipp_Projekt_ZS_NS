@@ -6,57 +6,297 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>333</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>People List</string>
+   <string>Lista Osób</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="styleSheet">
+   <string>QWidget {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    margin-top: 1ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+    color: #495057;
+}
+
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}
+
+QCheckBox {
+    spacing: 8px;
+    color: #495057;
+    font-weight: normal;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 2px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    background-color: #007bff;
+    image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY2NjcgMy41TDUuMjUgOS45MTY2N0wyLjMzMzM3IDciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+QLabel {
+    color: #495057;
+    font-weight: normal;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
    <item>
-    <widget class="QLabel" name="labelTitle">
+    <widget class="QGroupBox" name="filterGroupBox">
+     <property name="title">
+      <string>👥 Filtruj osoby</string>
+     </property>
+     <layout class="QHBoxLayout" name="filterLayout">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="actorsCheckBox">
+        <property name="text">
+         <string>🎭 Aktorzy</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="directorsCheckBox">
+        <property name="text">
+         <string>🎬 Reżyserzy</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="peopleListWidget">
      <property name="styleSheet">
-      <string notr="true">font-weight: bold; font-size: 18px;</string>
+      <string>QListWidget {
+    outline: none;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background-color: white;
+    selection-background-color: #e6f3ff;
+}
+
+QListWidget::item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    min-height: 80px;
+    margin: 2px;
+    border-radius: 6px;
+}
+
+QListWidget::item:selected {
+    background-color: #e6f3ff;
+    color: black;
+    border: 2px solid #007bff;
+}
+
+QListWidget::item:hover {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+QListWidget::item:selected:hover {
+    background-color: #cce7ff;
+    border: 2px solid #0056b3;
+}</string>
      </property>
-     <property name="text">
-      <string>People</string>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+     </property>
+     <property name="spacing">
+      <number>5</number>
      </property>
     </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="actorsCheckBox">
-     <property name="text">
-      <string>Actors</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="directorsCheckBox">
-     <property name="text">
-      <string>Directors</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QListWidget" name="peopleListWidget"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="buttonLayout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <item>
       <widget class="QPushButton" name="addPersonButton">
+       <property name="styleSheet">
+        <string>QPushButton {
+    background-color: #28a745;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #218838;
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;
+}</string>
+       </property>
        <property name="text">
-        <string>Add Person</string>
+        <string>➕ Dodaj osobę</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="goBackButton">
+      <widget class="QPushButton" name="removeButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string>QPushButton {
+    background-color: #dc3545;
+    min-width: 120px;
+}
+
+QPushButton:hover {
+    background-color: #c82333;
+}
+
+QPushButton:pressed {
+    background-color: #bd2130;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}</string>
+       </property>
        <property name="text">
-        <string>Go Back</string>
+        <string>🗑️ Usuń</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="goBackButton">
+       <property name="styleSheet">
+        <string>QPushButton {
+    background-color: #6c757d;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #5a6268;
+}
+
+QPushButton:pressed {
+    background-color: #545b62;
+}</string>
+       </property>
+       <property name="text">
+        <string>⬅️ Wróć</string>
        </property>
       </widget>
      </item>

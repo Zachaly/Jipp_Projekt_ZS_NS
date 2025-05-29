@@ -31,17 +31,11 @@ std::string PersonManager::addPerson(const std::string& firstName, const std::st
     return id;
 }
 
-void PersonManager::loadSampleData() {
-
-    if (people.empty()) {
-        try {
-            people.push_back(Person("John", "Doe", 1980, 5, 15, true, false));
-            people.push_back(Person("Jane", "Smith", 1985, 8, 22, false, true));
-            people.push_back(Person("Robert", "Johnson", 1975, 3, 10, true, true));
-        } catch (const std::invalid_argument& e) {
-
-        }
-    }
+void PersonManager::removePerson(const std::string& id)
+{
+    people.erase(std::remove_if(people.begin(), people.end(),
+                                [&id](const Person& person) { return person.getId() == id; }),
+                 people.end());
 }
 
 std::vector<Person> &PersonManager::getPeople(function<bool (Person)> filter)

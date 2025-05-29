@@ -13,13 +13,92 @@
   <property name="windowTitle">
    <string>Modify Person</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    margin-top: 1ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+    color: #495057;
+}
+
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}
+
+QCheckBox {
+    spacing: 8px;
+    color: #495057;
+    font-weight: normal;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 2px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    background-color: #007bff;
+    image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjY2NjcgMy41TDUuMjUgOS45MTY2N0wyLjMzMzM3IDciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+QLabel {
+    color: #495057;
+    font-weight: normal;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="labelFirstName">
        <property name="text">
-        <string>First Name:</string>
+        <string>Imię</string>
        </property>
       </widget>
      </item>
@@ -29,7 +108,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="labelLastName">
        <property name="text">
-        <string>Last Name:</string>
+        <string>Nazwisko</string>
        </property>
       </widget>
      </item>
@@ -39,7 +118,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="labelBirthDate">
        <property name="text">
-        <string>Birth Date:</string>
+        <string>Data urodzenia</string>
        </property>
       </widget>
      </item>
@@ -59,14 +138,14 @@
      <item row="3" column="0">
       <widget class="QCheckBox" name="actorCheckBox">
        <property name="text">
-        <string>Actor</string>
+        <string>Aktor</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
       <widget class="QCheckBox" name="directorCheckBox">
        <property name="text">
-        <string>Director</string>
+        <string>Reżyser</string>
        </property>
       </widget>
      </item>

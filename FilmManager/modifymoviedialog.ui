@@ -13,6 +13,126 @@
   <property name="windowTitle">
    <string>Modyfikuj film</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    margin-top: 1ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+    color: #495057;
+}
+
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;
+    color: #adb5bd;
+}
+
+QLineEdit {
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: white;
+    selection-background-color: #007bff;
+}
+
+QLineEdit:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+QComboBox {
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: white;
+    min-width: 120px;
+}
+
+QComboBox:focus {
+    border-color: #007bff;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: #ced4da;
+    border-left-style: solid;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/arrow-down.png);
+    width: 12px;
+    height: 12px;
+}
+
+QRadioButton {
+    spacing: 8px;
+    color: #495057;
+    font-weight: normal;
+}
+
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #ced4da;
+    border-radius: 9px;
+    background-color: white;
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #007bff;
+    border-radius: 9px;
+    background-color: #007bff;
+}
+
+QRadioButton::indicator:checked:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+QLabel {
+    color: #495057;
+    font-weight: normal;
+}</string>
+  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
