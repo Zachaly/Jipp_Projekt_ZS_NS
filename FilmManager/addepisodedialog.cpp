@@ -22,6 +22,7 @@ AddEpisodeDialog::AddEpisodeDialog(string serieId, QWidget *parent)
     ui->numberSpinBox->setRange(1, 200);
     ui->markSlider->setRange(1, 10);
     ui->productionYearSpinBox->setRange(1900, 2025);
+    setWindowTitle("Dodaj nowy odcinek");
 
     auto updateMark = [this]() {
         auto valString = toQString(to_string(ui->markSlider->value()));

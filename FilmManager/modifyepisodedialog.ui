@@ -15,127 +15,134 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="titleLabel">
-       <property name="text">
-        <string>Title</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="titleEdit"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="descriptionLabel">
-       <property name="text">
-        <string>Description</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QTextEdit" name="descriptionEdit"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="seasonLabel">
-       <property name="text">
-        <string>Season</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QSpinBox" name="seasonSpinBox"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="numberLabel">
-       <property name="text">
-        <string>Number</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="numberSpinBox"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="lengthLabel">
-       <property name="text">
-        <string>Length</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="lengthSpinBox"/>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="markLabel">
-       <property name="text">
-        <string>Mark</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="watchedLabel">
-       <property name="text">
-        <string>Watched</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QCheckBox" name="watchedCheckBox">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="directorLabel">
-       <property name="text">
-        <string>Director</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QComboBox" name="directorComboBox"/>
-     </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="actorLabel">
-       <property name="text">
-        <string>Actors</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="QListWidget" name="actorList"/>
-     </item>
-     <item row="6" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QSlider" name="markSlider">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="markValueLabel">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="productionYearLabel">
-       <property name="text">
-        <string>Production year</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="productionYearSpinBox"/>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Podstawowe informacje</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="titleLabel">
+        <property name="text">
+         <string>Tytuł</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="titleEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="descriptionLabel">
+        <property name="text">
+         <string>Opis</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QTextEdit" name="descriptionEdit"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="seasonLabel">
+        <property name="text">
+         <string>Sezon</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="seasonSpinBox"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="numberLabel">
+        <property name="text">
+         <string>Nr odcinka</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="numberSpinBox"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lengthLabel">
+        <property name="text">
+         <string>Czas trwania</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="lengthSpinBox"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="productionYearLabel">
+        <property name="text">
+         <string>Rok produkcji</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QSpinBox" name="productionYearSpinBox"/>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="markLabel">
+        <property name="text">
+         <string>Ocena</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QSlider" name="markSlider">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="markValueLabel">
+          <property name="text">
+           <string>1</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="watchedLabel">
+        <property name="text">
+         <string>Czy oglądnięty</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QCheckBox" name="watchedCheckBox">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="directorLabel">
+        <property name="text">
+         <string>Reżyser</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QComboBox" name="directorComboBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Obsada</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QListWidget" name="actorList"/>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

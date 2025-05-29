@@ -25,6 +25,8 @@ AddSerieDialog::AddSerieDialog(QWidget *parent)
         ui->markValueLabel->setText(valString);
     };
 
+    setWindowTitle("Dodaj nowy serial");
+
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
     comboBoxIds = vector<string>();
