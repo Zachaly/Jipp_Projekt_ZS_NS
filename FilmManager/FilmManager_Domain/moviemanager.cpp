@@ -1,7 +1,6 @@
 #include "moviemanager.h"
 #include <algorithm>
 #include <fstream>
-#include <sstream>
 #include <cctype>
 
 std::vector<Movie> MovieManager::movies;
@@ -9,10 +8,12 @@ std::vector<Movie> MovieManager::movies;
 void MovieManager::addMovie(const Movie& movie)
 {
     movies.push_back(movie);
+    saveToFile();
 }
 
 void MovieManager::updateMovie(const Movie& updatedMovie) {
     updateMovie(updatedMovie.getId(), updatedMovie);
+    saveToFile();
 }
 
 void MovieManager::updateMovie(const std::string& id, const Movie& updatedMovie)
@@ -23,6 +24,8 @@ void MovieManager::updateMovie(const std::string& id, const Movie& updatedMovie)
             break;
         }
     }
+
+    saveToFile();
 }
 
 void MovieManager::removeMovie(const std::string& id)
@@ -30,6 +33,7 @@ void MovieManager::removeMovie(const std::string& id)
     movies.erase(std::remove_if(movies.begin(), movies.end(),
                                 [&id](const Movie& movie) { return movie.getId() == id; }),
                  movies.end());
+    saveToFile();
 }
 
 Movie& MovieManager::getMovieById(const std::string& id)
@@ -116,4 +120,99 @@ std::vector<Movie> MovieManager::filterByWatched(bool watched)
         }
     }
     return result;
+}
+
+void MovieManager::saveToFile()
+{
+    ofstream file("movies.txt", std::ofstream::in | std::ofstream::trunc);
+
+    if(!file.is_open())
+    {
+        return;
+    }
+
+    for(auto& m : movies)
+    {
+        file << m.toString() << endl;
+    }
+
+    file.close();
+}
+
+void MovieManager::loadFromFile()
+{
+    ifstream file("movies.txt");
+
+    if(!file.is_open())
+    {
+        return;
+    }
+
+    string currentLine;
+
+    while(getline(file, currentLine))
+    {
+        if(currentLine.empty())
+        {
+            break;
+        }
+
+        auto pos = currentLine.find('_');
+        string id = currentLine.substr(0, pos);
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        string title = currentLine.substr(0, pos);
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        string description = currentLine.substr(0, pos);
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        Genre genre = (Genre)stoi(currentLine.substr(0, pos));
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        string creatorId = currentLine.substr(0, pos);
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        int year = stoi(currentLine.substr(0, pos));
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        int mark = stoi(currentLine.substr(0, pos));
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        bool isWatched = stoi(currentLine.substr(0, pos));
+        currentLine.erase(0, pos + 1);
+
+        pos = currentLine.find('_');
+        bool length = stoi(currentLine.substr(0, pos));
+        currentLine.erase(0, pos + 1);
+
+        vector<string> actors;
+
+        while (pos != string::npos) {
+
+            // Extracting the substring up to the
+            // delimiter
+            string actorId = currentLine.substr(0, pos);
+
+            // Erase the extracted part from the
+            // original string
+            currentLine.erase(0, pos + 1);
+
+            // Find the next occurrence of the
+            // delimiter
+            pos = currentLine.find('_');
+
+            actors.push_back(actorId);
+        }
+
+        Movie m = Movie(id, title, description, genre, creatorId, year, mark, isWatched, length, actors);
+        movies.push_back(m);
+    }
 }

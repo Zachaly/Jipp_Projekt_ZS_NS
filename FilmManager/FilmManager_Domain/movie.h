@@ -24,6 +24,7 @@ public:
     void addActor(const std::string& actorId);
     void removeActor(const std::string& actorId);
 
+    string toString();
 private:
     int length;
     std::vector<std::string> actorIds;

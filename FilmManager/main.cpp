@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "FilmManager_Domain/personmanager.h"
+#include "FilmManager_Domain/moviemanager.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     PersonManager::loadFromFile();
+    MovieManager::loadFromFile();
     app.setApplicationName("Film & Series Manager");
     app.setApplicationVersion("1.0");
     MainWindow w;

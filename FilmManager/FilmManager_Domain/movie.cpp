@@ -1,6 +1,8 @@
 #include "movie.h"
 #include <algorithm>
 
+#include <sstream>
+
 Movie::Movie() : TitleEntry(), length(0) {}
 
 Movie::Movie(const std::string& title, const std::string& description, Genre genre,
@@ -49,4 +51,19 @@ void Movie::addActor(const std::string& actorId)
 void Movie::removeActor(const std::string& actorId)
 {
     actorIds.erase(std::remove(actorIds.begin(), actorIds.end(), actorId), actorIds.end());
+}
+
+string Movie::toString()
+{
+    stringstream stream;
+    stream << getId() << "_" << getTitle() << "_" << getDescription() << "_"
+           << static_cast<int>(getGenre()) << "_" << getCreatorId() << "_" << getProductionYear() << "_"
+           << getMark() << "_" << getIsWatched() << "_" << length;
+
+    for(auto id : actorIds)
+    {
+        stream << "_" << id;
+    }
+
+    return stream.str();
 }
