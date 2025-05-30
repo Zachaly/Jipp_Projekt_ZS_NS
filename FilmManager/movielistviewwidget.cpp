@@ -12,8 +12,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>
-#include <QPixmap>
-#include <QFrame>
 #include <algorithm>
 
 using namespace std;
