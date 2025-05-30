@@ -11,6 +11,8 @@ public:
     static Serie& getById(string id);
     static void addSerie(Serie& serie);
     static void removeSerie(string id);
+    static void loadFromFile();
+    static void saveToFile();
 private:
     static std::vector<Serie> series;
 };

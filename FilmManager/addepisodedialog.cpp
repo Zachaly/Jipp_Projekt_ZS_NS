@@ -31,7 +31,6 @@ AddEpisodeDialog::AddEpisodeDialog(string serieId, QWidget *parent)
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
-
     comboBoxIds = vector<string>();
 
     loadLists();

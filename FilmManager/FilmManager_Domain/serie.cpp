@@ -52,10 +52,11 @@ void Serie::setEpisodeIds(const vector<string> &newEpisodeIds)
 string Serie::toString()
 {
     stringstream stream;
-    stream << stringify() << " " << status << " " << seasonCount;
-    for(auto i = episodeIds.cbegin(); i != episodeIds.cend(); i++)
+    stream << getId() << "_" << getTitle() << "_" << getDescription() << "_" << static_cast<int>(getGenre()) << "_" << getCreatorId() << "_" << getProductionYear() << "_"
+           << getMark() << "_" << getIsWatched() << "_" << status << "_" << seasonCount;
+    for(auto& id : episodeIds)
     {
-        stream << " " << *i;
+        stream << "_" << id;
     }
 
     return stream.str();

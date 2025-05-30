@@ -52,16 +52,12 @@ void EpisodeViewWidget::updateUi()
     ui->productionYearValueLabel->setText(toQString(to_string(episode.getProductionYear())));
     ui->watchedValueLabel->setText(toQString(episode.getIsWatched() ? "Yes" : "No"));
 
-    auto actors = PersonManager::getPeople([this](Person p) {
-        for(auto id : episode.getActorIds()){
-            if(id == p.getId())
-            {
-                return true;
-            }
-        }
+    vector<Person> actors;
 
-        return false;
-    });
+    for(auto id : episode.getActorIds())
+    {
+        actors.push_back(PersonManager::getPersonById(id));
+    }
 
     ui->actorList->clear();
     for(auto& a : actors)

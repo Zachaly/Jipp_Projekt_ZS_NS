@@ -22,11 +22,12 @@ Episode::Episode(string id, string title, string description, Genre genre, strin
 string Episode::toString()
 {
     stringstream stream;
-    stream << stringify() << getLength() << " " << episodeNumber << " " << seasonNumber << " " << seriesId;
+    stream << getId() << "_" << getTitle() << "_" << getDescription() << "_" << static_cast<int>(getGenre()) << "_" << getCreatorId() << "_" << getProductionYear() << "_"
+           << getMark() << "_" << getIsWatched() << "_" << getLength() << "_" << episodeNumber << "_" << seasonNumber << "_" << seriesId;
     auto actors = getActorIds();
-    for(auto i = actors.cbegin(); i != actors.cend(); i++)
+    for(auto id : actors)
     {
-        stream << " " << *i;
+        stream << "_" << id;
     }
 
     return stream.str();
