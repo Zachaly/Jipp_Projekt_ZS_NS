@@ -6,7 +6,6 @@
 #include "serielistviewwidget.h"
 #include "serieviewwidget.h"
 #include "ui_serieviewwidget.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/episodemanager.h"
 #include "displayhelpers.h"
 
@@ -76,7 +75,7 @@ void SerieViewWidget::goBack()
 
 void SerieViewWidget::goToEpisode()
 {
-    auto id = fromQString(ui->episodeList->currentItem()->data(Qt::UserRole).toString());
+    auto id = ui->episodeList->currentItem()->data(Qt::UserRole).toString().toStdString();
     Episode& episode = EpisodeManager::getById(id);
     ((MainWindow*)parent())->changePage(new EpisodeViewWidget(episode, (MainWindow*)parent()));
 }
@@ -286,13 +285,13 @@ void SerieViewWidget::updateUi()
 
     refreshEpisodes();
 
-    ui->creatorValueLabel->setText(toQString(creator.getFirstName() + " " + creator.getLastName()));
+    ui->creatorValueLabel->setText(QString::fromStdString(creator.getFirstName() + " " + creator.getLastName()));
     ui->genreValueLabel->setText(getGenreName(serie.getGenre()));
     ui->isWatchedValueLabel->setText(serie.getIsWatched() ? "Tak" : "Nie");
-    ui->markValueLabel->setText(toQString(to_string(serie.getMark())));
-    ui->descriptionLabel->setText(toQString(serie.getDescription()));
-    ui->titleLabel->setText(toQString(serie.getTitle()));
-    ui->productionYearValueLabel->setText(toQString(to_string(serie.getProductionYear())));
-    ui->seasonCountLabel->setText(toQString(to_string(serie.getSeasonCount())));
+    ui->markValueLabel->setText(QString::fromStdString(to_string(serie.getMark())));
+    ui->descriptionLabel->setText(QString::fromStdString(serie.getDescription()));
+    ui->titleLabel->setText(QString::fromStdString(serie.getTitle()));
+    ui->productionYearValueLabel->setText(QString::fromStdString(to_string(serie.getProductionYear())));
+    ui->seasonCountLabel->setText(QString::fromStdString(to_string(serie.getSeasonCount())));
     ui->statusValueLabel->setText(getStatusName(serie.getStatus()));
 }

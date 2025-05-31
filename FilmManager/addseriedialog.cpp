@@ -3,7 +3,6 @@
 #include "FilmManager_Domain/serieStatus.h"
 #include "ui_addseriedialog.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/genre.h"
 #include "FilmManager_Domain/seriesmanager.h"
 
@@ -21,7 +20,7 @@ AddSerieDialog::AddSerieDialog(QWidget *parent)
     ui->markSlider->setRange(1, 10);
 
     auto updateMark = [this]() {
-        auto valString = toQString(to_string(ui->markSlider->value()));
+        auto valString = QString::fromStdString(to_string(ui->markSlider->value()));
         ui->markValueLabel->setText(valString);
     };
 
@@ -35,8 +34,8 @@ AddSerieDialog::AddSerieDialog(QWidget *parent)
 
 void AddSerieDialog::on_buttonBox_accepted()
 {
-    string title = fromQString(ui->titleEdit->text().trimmed());
-    string description = fromQString(ui->descriptionTextEdit->toPlainText());
+    string title = ui->titleEdit->text().trimmed().toStdString();
+    string description = ui->descriptionTextEdit->toPlainText().trimmed().toStdString();
     int mark = ui->markSlider->value();
     bool isWatched = ui->watchedCheckBox->isChecked();
 
@@ -71,7 +70,7 @@ void AddSerieDialog::updateLists()
 
     for(auto& creator : creators)
     {
-        ui->creatorComboBox->addItem(toQString(creator.getFirstName() + " " + creator.getLastName()), QString::fromStdString(creator.getId()));
+        ui->creatorComboBox->addItem(QString::fromStdString(creator.getFirstName() + " " + creator.getLastName()), QString::fromStdString(creator.getId()));
         comboBoxIds.push_back(creator.getId());
     }
     ui->creatorComboBox->setCurrentIndex(0);

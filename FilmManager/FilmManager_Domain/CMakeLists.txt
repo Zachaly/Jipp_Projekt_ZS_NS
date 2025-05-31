@@ -36,6 +36,7 @@ add_library(FilmManager_Domain SHARED
 
 
 
+
 )
 
 target_link_libraries(FilmManager_Domain PRIVATE Qt${QT_VERSION_MAJOR}::Core)

@@ -4,7 +4,6 @@
 #include "serieviewwidget.h"
 #include "ui_episodeviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/seriesmanager.h"
 
 EpisodeViewWidget::EpisodeViewWidget(Episode& episode, MainWindow *parent)
@@ -42,15 +41,15 @@ void EpisodeViewWidget::modifyEpisode()
 void EpisodeViewWidget::updateUi()
 {
     auto director = PersonManager::getPersonById(episode.getCreatorId());
-    ui->directorValueLabel->setText(toQString(director.getFirstName() + " " + director.getLastName()));
-    ui->descriptionLabel->setText(toQString(episode.getDescription()));
-    ui->titleLabel->setText(toQString(episode.getTitle()));
-    ui->markValueLabel->setText(toQString(to_string(episode.getMark())));
-    ui->seasonValueLabel->setText(toQString(to_string(episode.getSeasonNumber())));
-    ui->numberValueLabel->setText(toQString(to_string(episode.getEpisodeNumber())));
-    ui->lengthValueLabel->setText(toQString(to_string(episode.getLength())));
-    ui->productionYearValueLabel->setText(toQString(to_string(episode.getProductionYear())));
-    ui->watchedValueLabel->setText(toQString(episode.getIsWatched() ? "Yes" : "No"));
+    ui->directorValueLabel->setText(QString::fromStdString(director.getFirstName() + " " + director.getLastName()));
+    ui->descriptionLabel->setText(QString::fromStdString(episode.getDescription()));
+    ui->titleLabel->setText(QString::fromStdString(episode.getTitle()));
+    ui->markValueLabel->setText(QString::fromStdString(to_string(episode.getMark())));
+    ui->seasonValueLabel->setText(QString::fromStdString(to_string(episode.getSeasonNumber())));
+    ui->numberValueLabel->setText(QString::fromStdString(to_string(episode.getEpisodeNumber())));
+    ui->lengthValueLabel->setText(QString::fromStdString(to_string(episode.getLength())));
+    ui->productionYearValueLabel->setText(QString::fromStdString(to_string(episode.getProductionYear())));
+    ui->watchedValueLabel->setText(QString::fromStdString(episode.getIsWatched() ? "Yes" : "No"));
 
     vector<Person> actors;
 
@@ -62,9 +61,9 @@ void EpisodeViewWidget::updateUi()
     ui->actorList->clear();
     for(auto& a : actors)
     {
-        QString label = toQString(a.getFirstName() + " " + a.getLastName());
+        QString label = QString::fromStdString(a.getFirstName() + " " + a.getLastName());
         auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, toQString(a.getId()));
+        item->setData(Qt::UserRole, QString::fromStdString(a.getId()));
         ui->actorList->addItem(item);
     }
 }

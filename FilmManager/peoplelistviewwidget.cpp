@@ -5,7 +5,6 @@
 #include "startviewwidget.h"
 #include "ui_peoplelistviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include <QMessageBox>
 #include <QListWidgetItem>
 #include <QHBoxLayout>

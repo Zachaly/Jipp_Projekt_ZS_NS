@@ -8,7 +8,6 @@
 #include "ui_serielistviewwidget.h"
 #include "FilmManager_Domain/seriesmanager.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 
 #include <QLabel>
 #include <QMessageBox>
@@ -336,7 +335,7 @@ void SerieListViewWidget::goBack()
 
 void SerieListViewWidget::goToSerie()
 {
-    auto id = fromQString(ui->serieList->currentItem()->data(Qt::UserRole).toString());
+    auto id = ui->serieList->currentItem()->data(Qt::UserRole).toString().toStdString();
 
     Serie& serie = SeriesManager::getById(id);
     ((MainWindow*)parent())->changePage(new SerieViewWidget(serie, (MainWindow*)parent()));

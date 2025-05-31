@@ -4,7 +4,6 @@
 #include "ui_addepisodedialog.h"
 #include "FilmManager_Domain/serie.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/seriesmanager.h"
 
 #include <QMessageBox>
@@ -25,7 +24,7 @@ AddEpisodeDialog::AddEpisodeDialog(string serieId, QWidget *parent)
     setWindowTitle("Dodaj nowy odcinek");
 
     auto updateMark = [this]() {
-        auto valString = toQString(to_string(ui->markSlider->value()));
+        auto valString = QString::fromStdString(to_string(ui->markSlider->value()));
         ui->markValueLabel->setText(valString);
     };
 
@@ -43,8 +42,8 @@ AddEpisodeDialog::~AddEpisodeDialog()
 
 void AddEpisodeDialog::on_buttonBox_accepted()
 {
-    string title = fromQString(ui->titleEdit->text());
-    string description = fromQString(ui->descriptionEdit->toPlainText());
+    string title = ui->titleEdit->text().toStdString();
+    string description = ui->descriptionEdit->toPlainText().toStdString();
 
     if(title.empty() || description.empty())
     {
@@ -67,7 +66,7 @@ void AddEpisodeDialog::on_buttonBox_accepted()
         auto* item = ui->actorList->item(i);
         if(item->checkState() == Qt::Checked)
         {
-            actorIds.push_back(fromQString(item->data(Qt::UserRole).toString()));
+            actorIds.push_back(item->data(Qt::UserRole).toString().toStdString());
         }
     }
 
@@ -96,16 +95,16 @@ void AddEpisodeDialog::loadLists()
     });
 
     for(auto& d : directors){
-        ui->directorComboBox->addItem(toQString(d.getFirstName() + " " + d.getLastName()));
+        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()));
         comboBoxIds.push_back(d.getId());
     }
     ui->directorComboBox->setCurrentIndex(0);
 
     for(auto& a : actors)
     {
-        QString label = toQString(a.getFirstName() + " " + a.getLastName());
+        QString label = QString::fromStdString(a.getFirstName() + " " + a.getLastName());
         auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, toQString(a.getId()));
+        item->setData(Qt::UserRole, QString::fromStdString(a.getId()));
         item->setCheckState(Qt::CheckState::Unchecked);
         ui->actorList->addItem(item);
     }
