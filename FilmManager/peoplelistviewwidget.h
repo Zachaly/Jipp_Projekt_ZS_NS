@@ -36,8 +36,6 @@ private:
     void createPersonListItem(const Person& person);
     void updatePeopleList();
     vector<Person> getFilteredPeople();
-    QString getRoleIcon(const Person& person);
-    QString getRoleText(const Person& person);
 
     Ui::PeopleListViewWidget *ui;
     vector<Person> currentPeople;

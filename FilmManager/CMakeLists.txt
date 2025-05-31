@@ -41,6 +41,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         addepisodedialog.h addepisodedialog.cpp addepisodedialog.ui
         modifyepisodedialog.h modifyepisodedialog.cpp modifyepisodedialog.ui
         modifyseriedialog.h modifyseriedialog.cpp modifyseriedialog.ui
+        displayhelpers.h
+        displayhelpers.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

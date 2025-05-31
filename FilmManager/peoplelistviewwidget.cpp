@@ -1,5 +1,6 @@
 #include "addpersondialog.h"
 #include "peoplelistviewwidget.h"
+#include "displayhelpers.h"
 #include "personviewwidget.h"
 #include "startviewwidget.h"
 #include "ui_peoplelistviewwidget.h"
@@ -67,30 +68,6 @@ void PeopleListViewWidget::setupListWidget()
         "    border: 2px solid #0056b3;"
         "}"
         );
-}
-
-QString PeopleListViewWidget::getRoleIcon(const Person& person)
-{
-    if (person.getIsDirector() && person.getIsActor()) {
-        return "🎭🎬";
-    } else if (person.getIsDirector()) {
-        return "🎬";
-    } else if (person.getIsActor()) {
-        return "🎭";
-    }
-    return "👤";
-}
-
-QString PeopleListViewWidget::getRoleText(const Person& person)
-{
-    if (person.getIsDirector() && person.getIsActor()) {
-        return "Reżyser & Aktor";
-    } else if (person.getIsDirector()) {
-        return "Reżyser";
-    } else if (person.getIsActor()) {
-        return "Aktor";
-    }
-    return "Osoba";
 }
 
 void PeopleListViewWidget::createPersonListItem(const Person& person)

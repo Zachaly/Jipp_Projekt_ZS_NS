@@ -7,9 +7,8 @@
 #include "serieviewwidget.h"
 #include "ui_serieviewwidget.h"
 #include "FilmManager_Domain/qstringhelpers.h"
-#include "FilmManager_Domain/genre.h"
-#include "FilmManager_Domain/serieStatus.h"
 #include "FilmManager_Domain/episodemanager.h"
+#include "displayhelpers.h"
 
 #include <QMessageBox>
 
@@ -82,20 +81,6 @@ void SerieViewWidget::goToEpisode()
     ((MainWindow*)parent())->changePage(new EpisodeViewWidget(episode, (MainWindow*)parent()));
 }
 
-QString SerieViewWidget::generateStarRating(double rating)
-{
-    int fullRating = static_cast<int>(round(rating));
-    if (fullRating < 1) fullRating = 1;
-    if (fullRating > 10) fullRating = 10;
-
-    QString stars;
-    for (int i = 0; i < fullRating; ++i) {
-        stars += "⭐";
-    }
-
-    return stars;
-}
-
 void SerieViewWidget::deleteSelectedEpisode()
 {
     QListWidgetItem* selectedItem = ui->episodeList->currentItem();
@@ -142,32 +127,6 @@ void SerieViewWidget::refreshEpisodes()
 
     for(auto& ep : episodes){
         addEpisodeListItem(ep);
-    }
-}
-
-QString SerieViewWidget::getGenreName(Genre genre)
-{
-    switch (genre) {
-    case Genre::Action: return "Akcja";
-    case Genre::Adventure: return "Przygodowy";
-    case Genre::Comedy: return "Komedia";
-    case Genre::Drama: return "Dramat";
-    case Genre::Horror: return "Horror";
-    case Genre::Romance: return "Romans";
-    case Genre::SciFi: return "Sci-Fi";
-    case Genre::Thriller: return "Thriller";
-    case Genre::Historical: return "Historyczny";
-    default: return "Nieznany";
-    }
-}
-
-QString SerieViewWidget::getStatusName(SerieStatus status)
-{
-    switch (status) {
-    case SerieStatus::Cancelled: return "Anulowany";
-    case SerieStatus::Ended: return "Zakończony";
-    case SerieStatus::Ongoing: return "Trwający";
-    default: return "Nieznany";
     }
 }
 

@@ -1,4 +1,5 @@
 #include "movielistviewwidget.h"
+#include "displayhelpers.h"
 #include "ui_movielistviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/moviemanager.h"
@@ -85,52 +86,6 @@ void MovieListViewWidget::populateSearchComboBox()
     ui->searchTypeComboBox->addItem("Aktorze", "actor");
     ui->searchTypeComboBox->addItem("Gatunku", "genre");
     ui->searchTypeComboBox->addItem("Roku produkcji", "year");
-}
-
-QString MovieListViewWidget::getGenreIcon(Genre genre)
-{
-    switch (genre) {
-    case Genre::Action: return "⚔️";
-    case Genre::Adventure: return "🗺️";
-    case Genre::Comedy: return "😄";
-    case Genre::Drama: return "🎭";
-    case Genre::Horror: return "👻";
-    case Genre::Romance: return "💕";
-    case Genre::SciFi: return "🚀";
-    case Genre::Thriller: return "🔪";
-    case Genre::Historical: return "🏛️";
-    default: return "🎬";
-    }
-}
-
-QString MovieListViewWidget::getGenreName(Genre genre)
-{
-    switch (genre) {
-    case Genre::Action: return "Akcja";
-    case Genre::Adventure: return "Przygodowy";
-    case Genre::Comedy: return "Komedia";
-    case Genre::Drama: return "Dramat";
-    case Genre::Horror: return "Horror";
-    case Genre::Romance: return "Romans";
-    case Genre::SciFi: return "Sci-Fi";
-    case Genre::Thriller: return "Thriller";
-    case Genre::Historical: return "Historyczny";
-    default: return "Nieznany";
-    }
-}
-
-QString MovieListViewWidget::generateStarRating(double rating)
-{
-    int fullRating = static_cast<int>(round(rating));
-    if (fullRating < 1) fullRating = 1;
-    if (fullRating > 10) fullRating = 10;
-
-    QString stars;
-    for (int i = 0; i < fullRating; ++i) {
-        stars += "⭐";
-    }
-
-    return stars;
 }
 
 void MovieListViewWidget::createMovieListItem(const Movie& movie)
