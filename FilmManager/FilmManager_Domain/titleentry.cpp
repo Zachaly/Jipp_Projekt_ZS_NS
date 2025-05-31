@@ -90,8 +90,7 @@ void TitleEntry::setIsWatched(bool newIsWatched)
 string TitleEntry::stringify()
 {
     stringstream stream;
-    stream << getId() << " " << "\"" << getTitle() << "\"" << " " << "\"" << getDescription() << "\" "
-           << static_cast<int>(genre) << " " << creatorId << " " << productionYear << " "
-           << mark << " " << (isWatched ? 1 : 0);
+    stream << getId() << "_" << getTitle() << "_" << getDescription() << "_" << static_cast<int>(genre) << "_" << creatorId << "_" << productionYear << "_"
+           << mark << "_" << isWatched;
     return stream.str();
 }

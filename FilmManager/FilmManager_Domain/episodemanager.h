@@ -11,6 +11,8 @@ public:
     static Episode& getById(string id);
     static void addEpisode(Episode& episode);
     static void removeEpisode(string id);
+    static void loadFromFile();
+    static void saveToFile();
 private:
     static vector<Episode> episodes;
 };

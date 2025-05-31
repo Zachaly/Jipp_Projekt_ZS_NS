@@ -19,6 +19,8 @@ public:
 
     static std::vector<Person>& getPeople(function<bool(Person)> filter);
 
+    static void saveToFile();
+    static void loadFromFile();
 private:
     static std::vector<Person> people;
 };

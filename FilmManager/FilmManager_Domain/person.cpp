@@ -146,7 +146,7 @@ void Person::setIsActor(bool value)
 string Person::toString()
 {
     stringstream stream;
-    stream << getId() << " " << firstName << " " << lastName << " " << birthYear << " " << birthMonth << " " << birthDay;
+    stream << getId() << "_" << firstName << "_" << lastName << "_" << birthYear << "_" << birthMonth << "_" << birthDay << "_" << isDirector << "_" << isActor;
     return stream.str();
 
 }

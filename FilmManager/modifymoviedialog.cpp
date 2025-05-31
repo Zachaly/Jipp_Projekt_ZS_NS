@@ -55,6 +55,13 @@ void ModifyMovieDialog::populateActors()
         QCheckBox* checkBox = new QCheckBox(displayName, this);
         checkBox->setProperty("personId", QString::fromStdString(person.getId()));
 
+        for(auto id : originalMovie.getActorIds())
+        {
+            if(id == person.getId())
+            {
+                checkBox->setChecked(true);
+            }
+        }
         actorCheckBoxes.push_back(checkBox);
         ui->actorsLayout->addWidget(checkBox);
     }

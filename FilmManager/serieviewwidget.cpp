@@ -126,14 +126,16 @@ void SerieViewWidget::refreshEpisodes()
 {
     vector<Episode> episodes;
 
+    string serieId = serie.getId();
+
     if(ui->allEpisodesRadio->isChecked())
     {
-        episodes = EpisodeManager::getEpisodes();
+        episodes = EpisodeManager::getEpisodes([serieId](Episode e) { return e.getSeriesId() == serieId; });
     }
     else
     {
         bool watched = ui->watchedEpisodesRadio->isChecked();
-        episodes = EpisodeManager::getEpisodes([watched](Episode s) { return s.getIsWatched() == watched; });
+        episodes = EpisodeManager::getEpisodes([watched, serieId](Episode e) { return e.getIsWatched() == watched && e.getSeriesId() == serieId;; });
     }
 
     ui->episodeList->clear();
