@@ -58,7 +58,6 @@ void ModifySerieDialog::on_buttonBox_accepted()
 
     string creatorId = ui->creatorComboBox->currentData().toString().toStdString();
 
-
     Genre genre = static_cast<Genre>(ui->genreComboBox->currentIndex());
 
     int productionYear = ui->productionYearSpinBox->value();
