@@ -11,6 +11,7 @@
 </p>
 
 
+
 Zarządzanie treściami:
 
 ➕ Dodawanie nowych filmów, seriali i odcinków<br>
@@ -18,6 +19,7 @@ Zarządzanie treściami:
 ❌ Usuwanie elementów kolekcji<br>
 👥 Zarządzanie bazą aktorów i reżyserów<br>
 🔄 Filtrowanie według ról
+
 
 
 
@@ -30,11 +32,13 @@ Organizacja kolekcji:
 
 
 
+
 Przeglądanie danych:
 
 🔎 Szczegółowe informacje o każdym filmie/serialu<br>
 📋 Lista obsady i twórców<br>
 📝 Szczegółowe profile
+
 
 
 <p align="center">
