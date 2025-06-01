@@ -7,7 +7,7 @@
 ## Opis
 
 <p align="center">
-<strong>Główne funkcjonalności</strong>
+🌟<strong>Główne funkcjonalności</strong>
 </p>
 
 
