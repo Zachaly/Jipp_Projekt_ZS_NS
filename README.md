@@ -7,11 +7,12 @@
 ## Opis
 
 <p align="center">
-🌟 <strong>Główne funkcjonalności:</strong>
+🌟 <strong>Główne funkcjonalności</strong>
 </p>
 
 
 🎥 Zarządzanie treściami:
+
 ➕ Dodawanie nowych filmów, seriali i odcinków<br>
 ✏️ Edycja istniejących pozycji<br>
 ❌ Usuwanie elementów kolekcji<br>
@@ -20,7 +21,8 @@
 
 
 
-🔍 <strong>Organizacja kolekcji:</strong><br>
+🔍 <strong>Organizacja kolekcji</strong><br>
+
 🏷️ Filtrowanie według gatunku (akcja, komedia, horror itp.)<br>
 👁️ Podział na obejrzane/nieobejrzane<br>
 🏷️ Status serialu (trwający/zakończony)<br>
@@ -28,7 +30,8 @@
 
 
 
-📊 <strong>Przeglądanie danych:</strong><br>
+📊 <strong>Przeglądanie danych</strong><br>
+
 🔎 Szczegółowe informacje o każdym filmie/serialu<br>
 📋 Lista obsady i twórców<br>
 📝 Szczegółowe profile
