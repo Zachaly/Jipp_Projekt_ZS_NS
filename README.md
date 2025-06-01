@@ -3,6 +3,7 @@
 📽️ Film & Series Manager to aplikacja desktopowa napisana w C++ z wykorzystaniem frameworka Qt, służąca do zarządzania kolekcją filmów i seriali. 
 
 # Opis
+
 🌟 **Główne funkcjonalności:**
 🎥 Zarządzanie treściami
    ➕ Dodawanie nowych filmów, seriali i odcinków
