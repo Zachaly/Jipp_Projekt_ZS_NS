@@ -42,10 +42,6 @@ private:
     void viewSelectedMovie();
     vector<Movie> getFilteredMovies();
 
-    QString getGenreIcon(Genre genre);
-    QString getGenreName(Genre genre);
-    QString generateStarRating(double rating);
-
     Ui::MovieListViewWidget *ui;
     vector<Movie> currentMovies;
 };

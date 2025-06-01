@@ -3,7 +3,6 @@
 #include <QMessageBox>
 #include <QString>
 
-
 ModifyPersonDialog::ModifyPersonDialog(Person& person, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ModifyPersonDialog),
@@ -22,7 +21,6 @@ ModifyPersonDialog::ModifyPersonDialog(Person& person, QWidget *parent)
     ui->daySpin->setRange(1, 31);
     ui->daySpin->setValue(person.getBirthDay());
 
-
     connect(ui->monthSpin, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &ModifyPersonDialog::adjustDayRange);
     connect(ui->yearSpin, QOverload<int>::of(&QSpinBox::valueChanged),
@@ -37,7 +35,6 @@ ModifyPersonDialog::ModifyPersonDialog(Person& person, QWidget *parent)
     ui->directorCheckBox->setChecked(person.getIsDirector());
     ui->actorCheckBox->setChecked(person.getIsActor());
 }
-
 
 ModifyPersonDialog::~ModifyPersonDialog()
 {

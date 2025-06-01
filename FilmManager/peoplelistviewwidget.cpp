@@ -1,10 +1,10 @@
 #include "addpersondialog.h"
 #include "peoplelistviewwidget.h"
+#include "displayhelpers.h"
 #include "personviewwidget.h"
 #include "startviewwidget.h"
 #include "ui_peoplelistviewwidget.h"
 #include "FilmManager_Domain/personmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include <QMessageBox>
 #include <QListWidgetItem>
 #include <QHBoxLayout>
@@ -69,30 +69,6 @@ void PeopleListViewWidget::setupListWidget()
         );
 }
 
-QString PeopleListViewWidget::getRoleIcon(const Person& person)
-{
-    if (person.getIsDirector() && person.getIsActor()) {
-        return "🎭🎬";
-    } else if (person.getIsDirector()) {
-        return "🎬";
-    } else if (person.getIsActor()) {
-        return "🎭";
-    }
-    return "👤";
-}
-
-QString PeopleListViewWidget::getRoleText(const Person& person)
-{
-    if (person.getIsDirector() && person.getIsActor()) {
-        return "Reżyser & Aktor";
-    } else if (person.getIsDirector()) {
-        return "Reżyser";
-    } else if (person.getIsActor()) {
-        return "Aktor";
-    }
-    return "Osoba";
-}
-
 void PeopleListViewWidget::createPersonListItem(const Person& person)
 {
     QWidget* itemWidget = new QWidget();
@@ -111,10 +87,8 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleIconLabel->setStyleSheet(roleIconLabel->styleSheet() +
                                  "background-color: #f0f8ff; border-radius: 25px; border: 2px solid #007bff;");
 
-
     QVBoxLayout* infoLayout = new QVBoxLayout();
     infoLayout->setSpacing(5);
-
 
     QLabel* nameLabel = new QLabel();
     QString fullName = QString("%1 %2")
@@ -127,15 +101,12 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleLabel->setText(QString("rola: %1").arg(getRoleText(person)));
     roleLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: normal;");
 
-
     infoLayout->addWidget(nameLabel);
     infoLayout->addWidget(roleLabel);
     infoLayout->addStretch();
 
-
     QVBoxLayout* rightLayout = new QVBoxLayout();
     rightLayout->setAlignment(Qt::AlignTop | Qt::AlignRight);
-
 
     QLabel* statusLabel = new QLabel();
     if (person.getIsDirector() && person.getIsActor()) {

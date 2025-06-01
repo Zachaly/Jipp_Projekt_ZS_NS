@@ -2,7 +2,6 @@
 #include "FilmManager_Domain/serie.h"
 #include "ui_modifyepisodedialog.h"
 #include "FilmManager_Domain/seriesmanager.h"
-#include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/episodemanager.h"
 
@@ -22,14 +21,11 @@ ModifyEpisodeDialog::ModifyEpisodeDialog(Episode& episode, QWidget *parent)
     ui->productionYearSpinBox->setRange(1900, 2025);
 
     auto updateMark = [this]() {
-        auto valString = toQString(to_string(ui->markSlider->value()));
+        auto valString = QString::fromStdString(to_string(ui->markSlider->value()));
         ui->markValueLabel->setText(valString);
     };
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
-
-
-    comboBoxIds = vector<string>();
 
     loadData();
 }
@@ -41,14 +37,14 @@ ModifyEpisodeDialog::~ModifyEpisodeDialog()
 
 void ModifyEpisodeDialog::on_buttonBox_accepted()
 {
-    string title = fromQString(ui->titleEdit->text());
-    string description = fromQString(ui->descriptionEdit->toPlainText());
+    string title = ui->titleEdit->text().toStdString();
+    string description = ui->descriptionEdit->toPlainText().toStdString();
     if(title.empty() || description.empty())
     {
         QMessageBox::warning(this, "Incomplete", "Title and description are required.");
         return;
     }
-    string directorId = comboBoxIds[ui->directorComboBox->currentIndex()];
+    string directorId = ui->directorComboBox->currentData().toString().toStdString();
     int productionYear = ui->productionYearSpinBox->value();
     int mark = ui->markSlider->value();
     bool isWatched = ui->watchedCheckBox->isChecked();
@@ -63,7 +59,7 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
         auto* item = ui->actorList->item(i);
         if(item->checkState() == Qt::Checked)
         {
-            actorIds.push_back(fromQString(item->data(Qt::UserRole).toString()));
+            actorIds.push_back(item->data(Qt::UserRole).toString().toStdString());
         }
     }
 
@@ -71,13 +67,6 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
     {
         QMessageBox::warning(this, "Incomplete", "You must select at least 1 actor.");
         return;
-    }
-
-    //episode.getActorIds().clear();
-
-    for(auto& id : actorIds)
-    {
-        episode.addActor(id);
     }
 
     episode.setTitle(title);
@@ -89,10 +78,10 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
     episode.setLength(length);
     episode.setEpisodeNumber(number);
     episode.setSeasonNumber(seasonNumber);
+    episode.setActorIds(actorIds);
 
     EpisodeManager::saveToFile();
 
-    emit episodeUpdated();
     accept();
 }
 
@@ -108,8 +97,7 @@ void ModifyEpisodeDialog::loadData()
 
     int i = 0;
     for(auto& d : directors){
-        ui->directorComboBox->addItem(toQString(d.getFirstName() + " " + d.getLastName()));
-        comboBoxIds.push_back(d.getId());
+        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()), QString::fromStdString(d.getId()));
         if(d.getId() == episode.getCreatorId())
         {
             ui->directorComboBox->setCurrentIndex(i);
@@ -119,9 +107,9 @@ void ModifyEpisodeDialog::loadData()
 
     for(auto& a : actors)
     {
-        QString label = toQString(a.getFirstName() + " " + a.getLastName());
+        QString label = QString::fromStdString(a.getFirstName() + " " + a.getLastName());
         auto* item = new QListWidgetItem(label);
-        item->setData(Qt::UserRole, toQString(a.getId()));
+        item->setData(Qt::UserRole, QString::fromStdString(a.getId()));
         item->setCheckState(Qt::Unchecked);
         for(auto id : episode.getActorIds())
         {
@@ -134,8 +122,8 @@ void ModifyEpisodeDialog::loadData()
         ui->actorList->addItem(item);
     }
 
-    ui->titleEdit->setText(toQString(episode.getTitle()));
-    ui->descriptionEdit->setText(toQString(episode.getDescription()));
+    ui->titleEdit->setText(QString::fromStdString(episode.getTitle()));
+    ui->descriptionEdit->setText(QString::fromStdString(episode.getDescription()));
     ui->markSlider->setValue(episode.getMark());
     ui->seasonSpinBox->setValue(episode.getSeasonNumber());
     ui->numberSpinBox->setValue(episode.getEpisodeNumber());
