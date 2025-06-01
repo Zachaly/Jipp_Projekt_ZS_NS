@@ -7,6 +7,7 @@
 🌟 **Główne funkcjonalności:**
 
 🎥 **Zarządzanie treściami:**  
+
   ➕ Dodawanie nowych filmów, seriali i odcinków  
   ✏️ Edycja istniejących pozycji  
   ❌ Usuwanie elementów kolekcji  
@@ -14,16 +15,19 @@
   🔄 Filtrowanie według ról  
 
 🔍 **Organizacja kolekcji:**  
+
   🏷️ Filtrowanie według gatunku (akcja, komedia, horror itp.)  
   👁️ Podział na obejrzane/nieobejrzane  
   🏷️ Status serialu (trwający/zakończony)  
   ⭐ System oceniania w skali 1-10  
 
 📊 **Przeglądanie danych:**  
+
   🔎 Szczegółowe informacje o każdym filmie/serialu  
   📋 Lista obsady i twórców  
   📝 Szczegółowe profile  
 
 🛠️ **Wykorzystane technologie:**  
+
   **Qt** - framework do tworzenia interfejsów użytkownika  
   **C++17** - język programowania  
