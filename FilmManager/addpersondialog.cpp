@@ -35,7 +35,7 @@ AddPersonDialog::AddPersonDialog(QWidget *parent)
     connect(ui->monthSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, adjustDays);
     connect(ui->yearSpin,  QOverload<int>::of(&QSpinBox::valueChanged), this, adjustDays);
     adjustDays();
-    }
+}
 
 
 AddPersonDialog::~AddPersonDialog()
