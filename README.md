@@ -21,7 +21,7 @@
 
 
 
-🔍 <strong>Organizacja kolekcji:</strong><br>
+🔍 Organizacja kolekcji:
 
 🏷️ Filtrowanie według gatunku (akcja, komedia, horror itp.)<br>
 👁️ Podział na obejrzane/nieobejrzane<br>
@@ -30,7 +30,7 @@
 
 
 
-📊 <strong>Przeglądanie danych:</strong><br>
+📊 Przeglądanie danych:
 
 🔎 Szczegółowe informacje o każdym filmie/serialu<br>
 📋 Lista obsady i twórców<br>
