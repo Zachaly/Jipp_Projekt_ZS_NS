@@ -1,33 +1,41 @@
 # 🎬 Film & Series Manager - Aplikacja do zarządzania kolekcją filmów i seriali
 
-📽️ Film & Series Manager to aplikacja desktopowa napisana w C++ z wykorzystaniem frameworka Qt, służąca do zarządzania kolekcją filmów i seriali. 
+<p align="center">
+📽️ Film & Series Manager to aplikacja desktopowa napisana w C++ z wykorzystaniem frameworka Qt
+</p>
 
 ## Opis
 
-🌟 **Główne funkcjonalności:**
+<p align="center">
+🌟 <strong>Główne funkcjonalności:</strong>
+</p>
 
-🎥 **Zarządzanie treściami:**  
+<p align="center">
+🎥 <strong>Zarządzanie treściami:</strong><br>
+➕ Dodawanie nowych filmów, seriali i odcinków<br>
+✏️ Edycja istniejących pozycji<br>
+❌ Usuwanie elementów kolekcji<br>
+👥 Zarządzanie bazą aktorów i reżyserów<br>
+🔄 Filtrowanie według ról
+</p>
 
-  ➕ Dodawanie nowych filmów, seriali i odcinków  
-  ✏️ Edycja istniejących pozycji  
-  ❌ Usuwanie elementów kolekcji  
-  👥 Zarządzanie bazą aktorów i reżyserów  
-  🔄 Filtrowanie według ról  
+<p align="center">
+🔍 <strong>Organizacja kolekcji:</strong><br>
+🏷️ Filtrowanie według gatunku (akcja, komedia, horror itp.)<br>
+👁️ Podział na obejrzane/nieobejrzane<br>
+🏷️ Status serialu (trwający/zakończony)<br>
+⭐ System oceniania w skali 1-10
+</p>
 
-🔍 **Organizacja kolekcji:**  
+<p align="center">
+📊 <strong>Przeglądanie danych:</strong><br>
+🔎 Szczegółowe informacje o każdym filmie/serialu<br>
+📋 Lista obsady i twórców<br>
+📝 Szczegółowe profile
+</p>
 
-  🏷️ Filtrowanie według gatunku (akcja, komedia, horror itp.)  
-  👁️ Podział na obejrzane/nieobejrzane  
-  🏷️ Status serialu (trwający/zakończony)  
-  ⭐ System oceniania w skali 1-10  
-
-📊 **Przeglądanie danych:**  
-
-  🔎 Szczegółowe informacje o każdym filmie/serialu  
-  📋 Lista obsady i twórców  
-  📝 Szczegółowe profile  
-
-🛠️ **Wykorzystane technologie:**  
-
-  **Qt** - framework do tworzenia interfejsów użytkownika  
-  **C++17** - język programowania  
+<p align="center">
+🛠️ <strong>Wykorzystane technologie:</strong><br>
+<img src="https://img.shields.io/badge/Qt-41CD52?style=for-the-badge&logo=qt&logoColor=white" alt="Qt"><br>
+<img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++17">
+</p>
