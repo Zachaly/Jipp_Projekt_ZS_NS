@@ -37,8 +37,8 @@
 📝 Szczegółowe profile
 
 
-
-🛠️ <strong>Wykorzystane technologie:</strong><br>
+<p align="center">
+🛠️ <strong>Wykorzystane technologie</strong><br>
 <img src="https://img.shields.io/badge/Qt-41CD52?style=for-the-badge&logo=qt&logoColor=white" alt="Qt"><br>
 <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++17">
-
+</p>
