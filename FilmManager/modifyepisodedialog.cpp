@@ -4,6 +4,7 @@
 #include "FilmManager_Domain/seriesmanager.h"
 #include "FilmManager_Domain/qstringhelpers.h"
 #include "FilmManager_Domain/personmanager.h"
+#include "FilmManager_Domain/episodemanager.h"
 
 #include <QMessageBox>
 
@@ -88,6 +89,8 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
     episode.setLength(length);
     episode.setEpisodeNumber(number);
     episode.setSeasonNumber(seasonNumber);
+
+    EpisodeManager::saveToFile();
 
     emit episodeUpdated();
     accept();

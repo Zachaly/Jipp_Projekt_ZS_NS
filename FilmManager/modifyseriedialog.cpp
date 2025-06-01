@@ -4,6 +4,7 @@
 #include "FilmManager_Domain/personmanager.h"
 #include "FilmManager_Domain/genre.h"
 #include "FilmManager_Domain/serieStatus.h"
+#include "FilmManager_Domain/seriesmanager.h"
 
 #include <QMessageBox>
 
@@ -75,6 +76,8 @@ void ModifySerieDialog::on_buttonBox_accepted()
     serie.setProductionYear(productionYear);
     serie.setSeasonCount(seasonCount);
     serie.setStatus(status);
+
+    SeriesManager::saveToFile();
 
     emit serieUpdated();
     accept();

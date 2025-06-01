@@ -190,10 +190,12 @@ void MovieManager::loadFromFile()
         currentLine.erase(0, pos + 1);
 
         pos = currentLine.find('_');
-        bool length = stoi(currentLine.substr(0, pos));
+        int length = stoi(currentLine.substr(0, pos));
         currentLine.erase(0, pos + 1);
 
         vector<string> actors;
+
+        pos = currentLine.find('_');
 
         while (pos != string::npos) {
 
@@ -210,6 +212,11 @@ void MovieManager::loadFromFile()
             pos = currentLine.find('_');
 
             actors.push_back(actorId);
+        }
+
+        if(!currentLine.empty())
+        {
+            actors.push_back(currentLine);
         }
 
         Movie m = Movie(id, title, description, genre, creatorId, year, mark, isWatched, length, actors);
