@@ -28,7 +28,6 @@ AddSerieDialog::AddSerieDialog(QWidget *parent)
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
-    comboBoxIds = vector<string>();
     updateLists();
 }
 
@@ -58,7 +57,6 @@ void AddSerieDialog::on_buttonBox_accepted()
     Serie serie = Serie(title, description, genre, creatorId, productionYear, mark, isWatched, status, seasonCount, vector<string>());
 
     SeriesManager::addSerie(serie);
-    emit serieAdded();
     accept();
 }
 
@@ -71,7 +69,6 @@ void AddSerieDialog::updateLists()
     for(auto& creator : creators)
     {
         ui->creatorComboBox->addItem(QString::fromStdString(creator.getFirstName() + " " + creator.getLastName()), QString::fromStdString(creator.getId()));
-        comboBoxIds.push_back(creator.getId());
     }
     ui->creatorComboBox->setCurrentIndex(0);
 

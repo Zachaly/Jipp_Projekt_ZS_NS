@@ -16,9 +16,6 @@ public:
     explicit ModifySerieDialog(Serie& serie, QWidget *parent = nullptr);
     ~ModifySerieDialog();
 
-signals:
-    void serieUpdated();
-
 private slots:
     void on_buttonBox_accepted();
 
@@ -26,7 +23,6 @@ private:
     Ui::ModifySerieDialog *ui;
     Serie& serie;
     void updateLists();
-    std::vector<std::string> comboBoxIds;
 };
 
 #endif // MODIFYSERIEDIALOG_H

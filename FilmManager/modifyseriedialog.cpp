@@ -33,8 +33,6 @@ ModifySerieDialog::ModifySerieDialog(Serie& serie, QWidget *parent)
     ui->productionYearSpinBox->setValue(serie.getProductionYear());
     ui->watchedCheckBox->setChecked(serie.getIsWatched());
 
-    comboBoxIds = vector<string>();
-
     updateLists();
 }
 
@@ -58,7 +56,6 @@ void ModifySerieDialog::on_buttonBox_accepted()
 
     string creatorId = ui->creatorComboBox->currentData().toString().toStdString();
 
-
     Genre genre = static_cast<Genre>(ui->genreComboBox->currentIndex());
 
     int productionYear = ui->productionYearSpinBox->value();
@@ -79,7 +76,6 @@ void ModifySerieDialog::on_buttonBox_accepted()
 
     SeriesManager::saveToFile();
 
-    emit serieUpdated();
     accept();
 }
 

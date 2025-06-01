@@ -30,8 +30,6 @@ AddEpisodeDialog::AddEpisodeDialog(string serieId, QWidget *parent)
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
-    comboBoxIds = vector<string>();
-
     loadLists();
 }
 
@@ -51,7 +49,7 @@ void AddEpisodeDialog::on_buttonBox_accepted()
         return;
     }
 
-    string directorId = comboBoxIds[ui->directorComboBox->currentIndex()];
+    string directorId = ui->directorComboBox->currentData().toString().toStdString();
     int productionYear = ui->productionYearSpinBox->value();
     int mark = ui->markSlider->value();
     bool isWatched = ui->watchedCheckBox->isChecked();
@@ -80,7 +78,6 @@ void AddEpisodeDialog::on_buttonBox_accepted()
 
     EpisodeManager::addEpisode(ep);
 
-    emit episodeAdded();
     accept();
 }
 
@@ -95,8 +92,7 @@ void AddEpisodeDialog::loadLists()
     });
 
     for(auto& d : directors){
-        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()));
-        comboBoxIds.push_back(d.getId());
+        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()), QString::fromStdString(d.getId()));
     }
     ui->directorComboBox->setCurrentIndex(0);
 

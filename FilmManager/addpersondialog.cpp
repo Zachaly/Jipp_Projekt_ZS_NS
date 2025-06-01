@@ -1,5 +1,6 @@
 #include "addpersondialog.h"
 #include "ui_addpersondialog.h"
+#include "FilmManager_Domain/personmanager.h"
 #include <QMessageBox>
 #include <QSpinBox>
 
@@ -34,8 +35,7 @@ AddPersonDialog::AddPersonDialog(QWidget *parent)
     connect(ui->monthSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, adjustDays);
     connect(ui->yearSpin,  QOverload<int>::of(&QSpinBox::valueChanged), this, adjustDays);
     adjustDays();
-    }
-
+}
 
 AddPersonDialog::~AddPersonDialog()
 {
@@ -61,7 +61,6 @@ void AddPersonDialog::on_buttonBox_accepted()
         PersonManager::addPerson(fnQ.toStdString(),
                                  lnQ.toStdString(),
                                  y, m, d, isActor, isDirector);
-        emit personAdded();
         accept();
     }
     catch (const std::invalid_argument& e) {

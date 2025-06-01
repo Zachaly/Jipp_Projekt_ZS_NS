@@ -71,7 +71,6 @@ QString getRoleText(const Person& person)
     return "Osoba";
 }
 
-
 QString getStatusName(SerieStatus status)
 {
     switch (status) {

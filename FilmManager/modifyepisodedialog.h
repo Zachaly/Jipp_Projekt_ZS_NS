@@ -17,13 +17,10 @@ public:
     ~ModifyEpisodeDialog();
 private slots:
     void on_buttonBox_accepted();
-signals:
-    void episodeUpdated();
 private:
     Ui::ModifyEpisodeDialog *ui;
     Episode& episode;
     void loadData();
-    vector<string> comboBoxIds;
 };
 
 #endif // MODIFYEPISODEDIALOG_H

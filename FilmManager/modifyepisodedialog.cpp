@@ -27,9 +27,6 @@ ModifyEpisodeDialog::ModifyEpisodeDialog(Episode& episode, QWidget *parent)
 
     connect(ui->markSlider, QOverload<int>::of(&QSlider::valueChanged), this, updateMark);
 
-
-    comboBoxIds = vector<string>();
-
     loadData();
 }
 
@@ -47,7 +44,7 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
         QMessageBox::warning(this, "Incomplete", "Title and description are required.");
         return;
     }
-    string directorId = comboBoxIds[ui->directorComboBox->currentIndex()];
+    string directorId = ui->directorComboBox->currentData().toString().toStdString();
     int productionYear = ui->productionYearSpinBox->value();
     int mark = ui->markSlider->value();
     bool isWatched = ui->watchedCheckBox->isChecked();
@@ -72,13 +69,6 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
         return;
     }
 
-    //episode.getActorIds().clear();
-
-    for(auto& id : actorIds)
-    {
-        episode.addActor(id);
-    }
-
     episode.setTitle(title);
     episode.setDescription(description);
     episode.setCreatorId(directorId);
@@ -88,10 +78,10 @@ void ModifyEpisodeDialog::on_buttonBox_accepted()
     episode.setLength(length);
     episode.setEpisodeNumber(number);
     episode.setSeasonNumber(seasonNumber);
+    episode.setActorIds(actorIds);
 
     EpisodeManager::saveToFile();
 
-    emit episodeUpdated();
     accept();
 }
 
@@ -107,8 +97,7 @@ void ModifyEpisodeDialog::loadData()
 
     int i = 0;
     for(auto& d : directors){
-        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()));
-        comboBoxIds.push_back(d.getId());
+        ui->directorComboBox->addItem(QString::fromStdString(d.getFirstName() + " " + d.getLastName()), QString::fromStdString(d.getId()));
         if(d.getId() == episode.getCreatorId())
         {
             ui->directorComboBox->setCurrentIndex(i);

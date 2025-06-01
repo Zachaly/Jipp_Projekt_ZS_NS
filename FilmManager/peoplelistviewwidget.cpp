@@ -87,10 +87,8 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleIconLabel->setStyleSheet(roleIconLabel->styleSheet() +
                                  "background-color: #f0f8ff; border-radius: 25px; border: 2px solid #007bff;");
 
-
     QVBoxLayout* infoLayout = new QVBoxLayout();
     infoLayout->setSpacing(5);
-
 
     QLabel* nameLabel = new QLabel();
     QString fullName = QString("%1 %2")
@@ -103,15 +101,12 @@ void PeopleListViewWidget::createPersonListItem(const Person& person)
     roleLabel->setText(QString("rola: %1").arg(getRoleText(person)));
     roleLabel->setStyleSheet("font-size: 12px; color: #6c757d; font-weight: normal;");
 
-
     infoLayout->addWidget(nameLabel);
     infoLayout->addWidget(roleLabel);
     infoLayout->addStretch();
 
-
     QVBoxLayout* rightLayout = new QVBoxLayout();
     rightLayout->setAlignment(Qt::AlignTop | Qt::AlignRight);
-
 
     QLabel* statusLabel = new QLabel();
     if (person.getIsDirector() && person.getIsActor()) {

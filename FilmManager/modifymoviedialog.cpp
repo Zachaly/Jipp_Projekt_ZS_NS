@@ -1,6 +1,5 @@
 #include "modifymoviedialog.h"
 #include "ui_modifymoviedialog.h"
-#include "FilmManager_Domain/moviemanager.h"
 #include "FilmManager_Domain/personmanager.h"
 #include <QMessageBox>
 
