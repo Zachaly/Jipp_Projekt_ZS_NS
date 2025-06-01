@@ -423,7 +423,6 @@ void SerieListViewWidget::updateList()
         series = SeriesManager::getSeries([](Serie s) { return !s.getIsWatched(); });
     }
 
-
     for(auto& s : series)
     {
         addSerieListItem(s);
